@@ -1,0 +1,37 @@
+import { Renderer, ElementRef } from '@angular/core';
+import { LabelsService } from '../../services';
+export declare class MultiCombo {
+    private _eref;
+    private _renderer;
+    private _labelsService;
+    constructor(_eref: ElementRef, _renderer: Renderer, _labelsService: LabelsService);
+    private self;
+    private labels(label);
+    private comboModel;
+    private _comboModel;
+    private filteredModel;
+    private title;
+    private display;
+    private filter;
+    private orderBy;
+    private reverse;
+    private maxSelected;
+    private disabled;
+    private onSelectItem;
+    private onDeselectItem;
+    private filteredModelChange;
+    private onOpen;
+    private onClose;
+    private filteredComboModel;
+    private search;
+    private show;
+    private toggleVisibility();
+    private isSelected(item);
+    private isDisabled();
+    private toggleItem(item);
+    private selectAll();
+    private deselectAll();
+    private displayItem(item);
+    private onClick(event);
+    private getFilter();
+}

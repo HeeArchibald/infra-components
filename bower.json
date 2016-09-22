@@ -1,0 +1,30 @@
+{
+    "name": "infra-components",
+    "description": "Angular2 agnostic components library",
+    "moduleType": "es6",
+    "main": "dist/index.js",
+    "authors": [
+        "Julien Elbaz <julien.elbaz@web-education.net>"
+    ],
+    "license": "GPL-3.0",
+    "keywords": [
+        "angular2",
+        "components"
+    ],
+    "homepage": "http://entcore.org",
+    "private": true,
+    "ignore": [
+        "node_modules/",
+        "bower_components/",
+        "config/",
+        "typings/",
+        ".vscode/",
+        "src/",
+        ".gitignore",
+        "tsconfig.json",
+        "tsconfig.bundle.json",
+        "typings.json",
+        "webpack.config.js",
+        "index.ts"
+    ]
+}
