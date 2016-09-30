@@ -16,32 +16,32 @@ import { Component } from '@angular/core'
         </footer>
     `,
     styles: [`
-    header{
-        position:relative;
-        display: flex;
-        align-items: center;
-        top: 0px;
-        width: 100%;
-    }
+        header{
+            position:relative;
+            display: flex;
+            align-items: center;
+            top: 0px;
+            width: 100%;
+        }
 
-    header >>> > div {
-        flex-grow: 1;
-        flex-basis: 33.3%;
-    }
-    header >>> > div {
-        display: flex;
-        align-items: center;
-    }
-    header >>> > div[header-middle] {
-        justify-content: center;
-    }
-    header >>> > div[header-right] {
-        flex-direction: row-reverse;
-    }
-    header >>> > div > *{
-        display: inline-block;
-        vertical-align: middle;
-    }
+        header >>> > div {
+            flex-grow: 1;
+            flex-basis: 33.3%;
+        }
+        header >>> > div {
+            display: flex;
+            align-items: center;
+        }
+        header >>> > div[header-middle] {
+            justify-content: center;
+        }
+        header >>> > div[header-right] {
+            flex-direction: row-reverse;
+        }
+        header >>> > div > *{
+            display: inline-block;
+            vertical-align: middle;
+        }
     `]
 })
 export class UxPortal{}

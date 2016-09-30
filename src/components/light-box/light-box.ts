@@ -4,12 +4,12 @@ import { Component, ViewChild, ElementRef,
 @Component({
     selector: 'light-box',
     template: `
-    <section [hidden]="!show" #section>
-        <div overlay #overlay></div>
-        <div content>
-            <ng-content></ng-content>
-        </div>
-    </section>
+        <section [hidden]="!show" #section>
+            <div overlay #overlay></div>
+            <div content>
+                <ng-content></ng-content>
+            </div>
+        </section>
     `,
     styles: [`
         section {
