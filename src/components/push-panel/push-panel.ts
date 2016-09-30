@@ -20,20 +20,20 @@ import { Component, Input, Output, EventEmitter, ElementRef, ViewChild } from '@
             top: 0px;
             left: -30%;
             width: 30%;
-            transition: left 0.25s;
+            transition: transform 0.25s;
         }
         :host > div:nth-child(1).opened {
-            left: 0%;
+            transform: translateX(100%);
         }
         :host > div:nth-child(2) {
             position: relative;
             left: 0%;
             opacity: 1;
-            transition: left 0.25s, opacity 0.25s;
+            transition: transform 0.25s, opacity 0.25s;
         }
         :host > div:nth-child(1).opened + div {
             opacity: 0.7;
-            left: 30%;
+            transform: translateX(30%);
             overflow-x: hidden;
         }
     `],

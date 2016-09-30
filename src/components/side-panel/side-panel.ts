@@ -13,10 +13,10 @@ import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/cor
             top: 0px;
             left: -30%;
             width: 30%;
-            transition: left 0.25s;
+            transition: transform 0.25s;
         }
         div.opened {
-            left: 0%;
+            transform: translateX(100%);
         }
     `],
     host: {
