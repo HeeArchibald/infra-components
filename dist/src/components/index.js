@@ -13,4 +13,6 @@ var multi_combo_1 = require('./multi-combo/multi-combo');
 exports.MultiCombo = multi_combo_1.MultiCombo;
 var light_box_1 = require('./light-box/light-box');
 exports.LightBox = light_box_1.LightBox;
+var tooltip_1 = require('./tooltip/tooltip');
+exports.Tooltip = tooltip_1.Tooltip;
 //# sourceMappingURL=index.js.map

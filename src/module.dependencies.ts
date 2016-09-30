@@ -2,8 +2,8 @@ import { CommonModule }    from '@angular/common'
 import { FormsModule }     from '@angular/forms'
 
 import { UxPortal, SidePanel, PushPanel, ItemTree,
-    SearchInput, MultiCombo, LightBox } from './components/index'
-import { DynamicTemplate, Tooltip }  from './directives/index'
+    SearchInput, MultiCombo, LightBox, Tooltip} from './components/index'
+import { DynamicTemplate }  from './directives/index'
 import { FilterPipe, OrderPipe,
     FlattenObjectArrayPipe, StorePipe } from './pipes/index'
 import { DynamicModuleImports } from './services/dynamicModuleImports'

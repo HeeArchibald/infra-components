@@ -22,7 +22,7 @@ exports.declarations = [
     index_3.StorePipe,
     index_3.FlattenObjectArrayPipe,
     index_2.DynamicTemplate,
-    index_2.Tooltip
+    index_1.Tooltip
 ];
 exports.providers = [
     dynamicModuleImports_1.DynamicModuleImports
