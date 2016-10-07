@@ -4,7 +4,6 @@ var forms_1 = require('@angular/forms');
 var index_1 = require('./components/index');
 var index_2 = require('./directives/index');
 var index_3 = require('./pipes/index');
-var dynamicModuleImports_1 = require('./services/dynamicModuleImports');
 exports.imports = [
     common_1.CommonModule,
     forms_1.FormsModule
@@ -23,9 +22,6 @@ exports.declarations = [
     index_3.FlattenObjectArrayPipe,
     index_2.DynamicTemplate,
     index_1.Tooltip
-];
-exports.providers = [
-    dynamicModuleImports_1.DynamicModuleImports
 ];
 exports.exportList = exports.declarations;
 //# sourceMappingURL=module.dependencies.js.map

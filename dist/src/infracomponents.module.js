@@ -11,20 +11,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 require('./rxjs-extensions');
 var core_1 = require('@angular/core');
 var deps = require('./module.dependencies');
+var services_1 = require('./services');
 var InfraComponentsModule = (function () {
     function InfraComponentsModule() {
     }
     InfraComponentsModule.forRoot = function (providers) {
+        var usedProviders = [
+            providers['DynamicModuleImports'] || services_1.DynamicModuleImports,
+            providers['LabelsService'] || services_1.LabelsService
+        ];
         return {
             ngModule: InfraComponentsModule,
-            providers: providers
+            providers: usedProviders
         };
     };
     InfraComponentsModule = __decorate([
         core_1.NgModule({
             imports: deps.imports,
             declarations: deps.declarations,
-            providers: deps.providers,
+            providers: [],
             exports: deps.exportList
         }), 
         __metadata('design:paramtypes', [])

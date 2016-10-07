@@ -42,8 +42,10 @@ var DynamicTemplate = (function () {
             return _mod_;
         }());
         return core_1.NgModule({
-            imports: [common_1.CommonModule, infracomponents_module_1.InfraComponentsModule]
-                .concat(this.dynamicModuleImports.imports),
+            imports: [
+                common_1.CommonModule,
+                infracomponents_module_1.InfraComponentsModule
+            ].concat(this.dynamicModuleImports.imports),
             declarations: [componentType],
             providers: []
         })(_mod_);
