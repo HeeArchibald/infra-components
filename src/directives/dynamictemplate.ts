@@ -44,8 +44,10 @@ export class DynamicTemplate {
     private _createDynamicModule(componentType: Type<any>) {
         class _mod_{}
         return NgModule({
-            imports: [CommonModule, InfraComponentsModule ]
-                .concat(this.dynamicModuleImports.imports),
+            imports: [
+                CommonModule, 
+                InfraComponentsModule, 
+                ...this.dynamicModuleImports.imports ],
             declarations: [componentType],
             providers: []
         })(_mod_)

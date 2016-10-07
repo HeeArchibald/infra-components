@@ -20,7 +20,7 @@ export class FlattenObjectArrayPipe {
                     if(val instanceof Array &&
                             !onlyProps ||
                             onlyProps.indexOf(prop) > -1){
-                        flattenedArray = flattenedArray.concat(val)
+                        flattenedArray = [...flattenedArray, ...val]
                         flatten(val)
                     }
                 }
