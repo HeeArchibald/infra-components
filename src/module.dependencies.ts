@@ -28,8 +28,4 @@ export let declarations = [
     Tooltip
 ]
 
-export let providers = [
-    DynamicModuleImports
-]
-
 export let exportList = declarations
