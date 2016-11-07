@@ -6,7 +6,7 @@
     "authors": [
         "Julien Elbaz <julien.elbaz@web-education.net>"
     ],
-    "license": "GPL-3.0",
+    "license": "AGPL-3.0",
     "keywords": [
         "angular2",
         "components"
@@ -22,9 +22,7 @@
         "src/",
         ".gitignore",
         "tsconfig.json",
-        "tsconfig.bundle.json",
         "typings.json",
-        "webpack.config.js",
         "index.ts"
     ]
 }

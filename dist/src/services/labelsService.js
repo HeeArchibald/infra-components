@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,8 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var LabelsService = (function () {
+import { Injectable } from '@angular/core';
+export var LabelsService = (function () {
     function LabelsService() {
         this.labels = {
             "select.all": "Select all",
@@ -20,6 +19,11 @@ var LabelsService = (function () {
     LabelsService.prototype.getLabel = function (label) {
         return this.labels[label] || label;
     };
+    LabelsService.prototype.mixin = function (labels) {
+        for (var property in labels) {
+            this.labels[property] = labels[property];
+        }
+    };
     LabelsService.withLabels = function (labels) {
         var newService = new LabelsService();
         for (var prop in labels) {
@@ -28,10 +32,9 @@ var LabelsService = (function () {
         return newService;
     };
     LabelsService = __decorate([
-        core_1.Injectable(), 
+        Injectable(), 
         __metadata('design:paramtypes', [])
     ], LabelsService);
     return LabelsService;
 }());
-exports.LabelsService = LabelsService;
 //# sourceMappingURL=labelsService.js.map

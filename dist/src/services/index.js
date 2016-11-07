@@ -1,7 +1,3 @@
-"use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-__export(require('./dynamicModuleImports'));
-__export(require('./labelsService'));
+export * from './dynamicModuleImports';
+export * from './labelsService';
 //# sourceMappingURL=index.js.map

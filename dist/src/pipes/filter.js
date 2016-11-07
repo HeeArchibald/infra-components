@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,8 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var FilterPipe = (function () {
+import { Pipe } from '@angular/core';
+export var FilterPipe = (function () {
     function FilterPipe() {
     }
     FilterPipe.prototype._filterString = function (value, filter, arrayRef) {
@@ -65,10 +64,9 @@ var FilterPipe = (function () {
         return filteredArray;
     };
     FilterPipe = __decorate([
-        core_1.Pipe({ name: 'filter' }), 
+        Pipe({ name: 'filter' }), 
         __metadata('design:paramtypes', [])
     ], FilterPipe);
     return FilterPipe;
 }());
-exports.FilterPipe = FilterPipe;
 //# sourceMappingURL=filter.js.map

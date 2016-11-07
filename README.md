@@ -11,20 +11,8 @@ Done !
 
 # Use it
 
->bower.json
+`npm install web-education/infra-components --save-dev`
 
-```json
-"dependencies": {
-    "infra-components": "git://github.com/web-education/infra-components#dev"
-}
-```
->.bowerrc
-
-```json
-{
-    "directory": "node_modules"
-}
-```
 >In your code
 
 ```typescript

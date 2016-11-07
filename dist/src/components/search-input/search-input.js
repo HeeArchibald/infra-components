@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,15 +7,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var Subject_1 = require('rxjs/Subject');
-var SearchInput = (function () {
+import { Component, Input, Output, EventEmitter, Renderer, ElementRef, ViewChild } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+export var SearchInput = (function () {
     function SearchInput(_elRef, _renderer) {
         this._elRef = _elRef;
         this._renderer = _renderer;
         this._delay = 200;
-        this.onChange = new core_1.EventEmitter();
-        this.searchTerms = new Subject_1.Subject();
+        this.onChange = new EventEmitter();
+        this.searchTerms = new Subject();
     }
     Object.defineProperty(SearchInput.prototype, "delay", {
         get: function () {
@@ -64,26 +63,25 @@ var SearchInput = (function () {
         this.searchTerms.next(str);
     };
     __decorate([
-        core_1.Input(), 
+        Input(), 
         __metadata('design:type', Number), 
         __metadata('design:paramtypes', [Number])
     ], SearchInput.prototype, "delay", null);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
+        Output(), 
+        __metadata('design:type', EventEmitter)
     ], SearchInput.prototype, "onChange", void 0);
     __decorate([
-        core_1.ViewChild("searchBox"), 
-        __metadata('design:type', core_1.ElementRef)
+        ViewChild("searchBox"), 
+        __metadata('design:type', ElementRef)
     ], SearchInput.prototype, "searchBox", void 0);
     SearchInput = __decorate([
-        core_1.Component({
+        Component({
             selector: 'search-input',
             template: "\n        <input type=\"search\" #searchBox (input)=\"search(searchBox.value)\"/>\n    "
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer])
+        __metadata('design:paramtypes', [ElementRef, Renderer])
     ], SearchInput);
     return SearchInput;
 }());
-exports.SearchInput = SearchInput;
 //# sourceMappingURL=search-input.js.map

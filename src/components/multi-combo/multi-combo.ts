@@ -15,6 +15,7 @@ export class MultiCombo {
 
     constructor(private _eref: ElementRef, private _renderer: Renderer, 
         private _labelsService: LabelsService){}
+        
     private self = this
     private labels(label){
         return this._labelsService.getLabel(label)

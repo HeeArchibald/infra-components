@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,8 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var ItemTree = (function () {
+import { Component, Input, Output, EventEmitter, ViewChild, ChangeDetectorRef } from '@angular/core';
+export var ItemTree = (function () {
     function ItemTree(_changeRef) {
         this._changeRef = _changeRef;
         this.items = [];
@@ -19,7 +18,7 @@ var ItemTree = (function () {
         this.order = [];
         this.reverse = false;
         this._flattenProps = [];
-        this.onSelect = new core_1.EventEmitter();
+        this.onSelect = new EventEmitter();
         this._depth = 0;
     }
     Object.defineProperty(ItemTree.prototype, "flatten", {
@@ -97,55 +96,54 @@ var ItemTree = (function () {
         setTimeout(function () { _this._changeRef.detectChanges(); }, 1);
     };
     __decorate([
-        core_1.Input(), 
+        Input(), 
         __metadata('design:type', Array)
     ], ItemTree.prototype, "items", void 0);
     __decorate([
-        core_1.Input("children"), 
+        Input("children"), 
         __metadata('design:type', String)
     ], ItemTree.prototype, "childrenProperty", void 0);
     __decorate([
-        core_1.Input("display"), 
+        Input("display"), 
         __metadata('design:type', String)
     ], ItemTree.prototype, "displayProperty", void 0);
     __decorate([
-        core_1.Input(), 
+        Input(), 
         __metadata('design:type', Object)
     ], ItemTree.prototype, "filter", void 0);
     __decorate([
-        core_1.Input(), 
+        Input(), 
         __metadata('design:type', Object)
     ], ItemTree.prototype, "order", void 0);
     __decorate([
-        core_1.Input(), 
+        Input(), 
         __metadata('design:type', Boolean)
     ], ItemTree.prototype, "reverse", void 0);
     __decorate([
-        core_1.Input(), 
+        Input(), 
         __metadata('design:type', Array), 
         __metadata('design:paramtypes', [Array])
     ], ItemTree.prototype, "flatten", null);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
+        Output(), 
+        __metadata('design:type', EventEmitter)
     ], ItemTree.prototype, "onSelect", void 0);
     __decorate([
-        core_1.ViewChild(ItemTree), 
+        ViewChild(ItemTree), 
         __metadata('design:type', ItemTree)
     ], ItemTree.prototype, "childItemTree", void 0);
     __decorate([
-        core_1.Input("lastSelected"), 
+        Input("lastSelected"), 
         __metadata('design:type', Object)
     ], ItemTree.prototype, "_lastSelectedItem", void 0);
     ItemTree = __decorate([
-        core_1.Component({
+        Component({
             selector: 'item-tree',
             template: "\n    <ul [ngClass]=\"{ flattened: isFlattened() }\">\n        <li *ngFor=\"let item of (items | flattenObjArray: flatten | filter: filter | orderBy: order:reverse)\"\n            [ngClass]=\"{ selected: isSelected(item), parent: hasChildren(item), root: _depth === 0 }\">\n            <a href=\"javascript:void(0)\" (click)=\"selectItem(item)\">{{ display(item) }}</a>\n            <item-tree\n                [items]=\"getChildren(item)\"\n                [children]=\"childrenProperty\"\n                [display]=\"displayProperty\"\n                [filter]=\"filter\"\n                [order]=\"order\"\n                [reverse]=\"reverse\"\n                [lastSelected]=\"_lastSelectedItem\"\n                (onSelect)=\"bubbleSelect($event)\"\n                *ngIf=\"!isFlattened() &&\n                    getChildren(item) &&\n                    isSelected(item)\"></item-tree>\n        </li>\n    </ul>\n    ",
             styles: []
         }), 
-        __metadata('design:paramtypes', [core_1.ChangeDetectorRef])
+        __metadata('design:paramtypes', [ChangeDetectorRef])
     ], ItemTree);
     return ItemTree;
 }());
-exports.ItemTree = ItemTree;
 //# sourceMappingURL=item-tree.js.map

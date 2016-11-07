@@ -11,7 +11,8 @@ module.exports = {
     output: {
         path: './dist/bundle',
         filename: '[name].bundle.js',
-        libraryTarget: 'commonjs2'
+        libraryTarget: 'umd',
+        umdNamedDefine: 'infraComponents'
     },
     resolve: {
         extensions: ['', '.js', '.ts']
@@ -19,7 +20,7 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.ts$/,
-            loaders: ['awesome-typescript-loader?tsconfig=tsconfig.bundle.json', 'angular2-template-loader']
+            loaders: ['awesome-typescript-loader?tsconfig=config/tsconfig.bundle.json', 'angular2-template-loader']
         }, { 
             test: /\.(html|css)$/, 
             loader: 'raw-loader'

@@ -1,3 +1,4 @@
+/// <reference types="core-js" />
 import { PipeTransform } from '@angular/core';
 export declare class FilterPipe implements PipeTransform {
     private _filterString(value, filter, arrayRef);

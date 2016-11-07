@@ -1,3 +1,4 @@
+/// <reference types="core-js" />
 import { AfterViewChecked, OnInit, ChangeDetectorRef } from '@angular/core';
 export declare class ItemTree<T> implements AfterViewChecked, OnInit {
     private _changeRef;

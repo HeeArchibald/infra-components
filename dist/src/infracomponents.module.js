@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,17 +7,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-require('./rxjs-extensions');
-var core_1 = require('@angular/core');
-var deps = require('./module.dependencies');
-var services_1 = require('./services');
-var InfraComponentsModule = (function () {
+import './rxjs-extensions';
+import { NgModule } from '@angular/core';
+import * as deps from './module.dependencies';
+import { DynamicModuleImports, LabelsService } from './services';
+export var InfraComponentsModule = (function () {
     function InfraComponentsModule() {
     }
     InfraComponentsModule.forRoot = function (providers) {
         var usedProviders = [
-            providers['DynamicModuleImports'] || services_1.DynamicModuleImports,
-            providers['LabelsService'] || services_1.LabelsService
+            providers['DynamicModuleImports'] || DynamicModuleImports,
+            providers['LabelsService'] || LabelsService
         ];
         return {
             ngModule: InfraComponentsModule,
@@ -26,7 +25,7 @@ var InfraComponentsModule = (function () {
         };
     };
     InfraComponentsModule = __decorate([
-        core_1.NgModule({
+        NgModule({
             imports: deps.imports,
             declarations: deps.declarations,
             providers: [],
@@ -36,5 +35,4 @@ var InfraComponentsModule = (function () {
     ], InfraComponentsModule);
     return InfraComponentsModule;
 }());
-exports.InfraComponentsModule = InfraComponentsModule;
 //# sourceMappingURL=infracomponents.module.js.map

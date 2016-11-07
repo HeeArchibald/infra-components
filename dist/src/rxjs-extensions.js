@@ -1,4 +1,3 @@
-"use strict";
-require('rxjs/add/operator/debounceTime');
-require('rxjs/add/operator/distinctUntilChanged');
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 //# sourceMappingURL=rxjs-extensions.js.map

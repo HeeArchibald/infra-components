@@ -1,27 +1,26 @@
-"use strict";
-var common_1 = require('@angular/common');
-var forms_1 = require('@angular/forms');
-var index_1 = require('./components/index');
-var index_2 = require('./directives/index');
-var index_3 = require('./pipes/index');
-exports.imports = [
-    common_1.CommonModule,
-    forms_1.FormsModule
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { UxPortal, SidePanel, PushPanel, ItemTree, SearchInput, MultiCombo, LightBox, Tooltip } from './components/index';
+import { DynamicTemplate } from './directives/index';
+import { FilterPipe, OrderPipe, FlattenObjectArrayPipe, StorePipe } from './pipes/index';
+export var imports = [
+    CommonModule,
+    FormsModule
 ];
-exports.declarations = [
-    index_1.UxPortal,
-    index_1.SidePanel,
-    index_1.PushPanel,
-    index_1.ItemTree,
-    index_1.SearchInput,
-    index_1.MultiCombo,
-    index_1.LightBox,
-    index_3.FilterPipe,
-    index_3.OrderPipe,
-    index_3.StorePipe,
-    index_3.FlattenObjectArrayPipe,
-    index_2.DynamicTemplate,
-    index_1.Tooltip
+export var declarations = [
+    UxPortal,
+    SidePanel,
+    PushPanel,
+    ItemTree,
+    SearchInput,
+    MultiCombo,
+    LightBox,
+    FilterPipe,
+    OrderPipe,
+    StorePipe,
+    FlattenObjectArrayPipe,
+    DynamicTemplate,
+    Tooltip
 ];
-exports.exportList = exports.declarations;
+export var exportList = declarations;
 //# sourceMappingURL=module.dependencies.js.map
