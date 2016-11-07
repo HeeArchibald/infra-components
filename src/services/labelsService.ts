@@ -13,6 +13,12 @@ export class LabelsService {
         return this.labels[label] || label
     }
 
+    mixin(labels: Object){
+        for(let property in labels){
+            this.labels[property] = labels[property]
+        }
+    }
+
     static withLabels(labels: Object){
         let newService = new LabelsService()
         for(let prop in labels){
