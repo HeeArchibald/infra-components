@@ -20,7 +20,8 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.ts$/,
-            loaders: ['awesome-typescript-loader?tsconfig=config/tsconfig.bundle.json', 'angular2-template-loader']
+            //loaders: ['awesome-typescript-loader?tsconfig=config/tsconfig.bundle.json', 'angular2-template-loader']
+            loaders: ['ts-loader?configFileName=config/tsconfig.bundle.json', 'angular2-template-loader']
         }, { 
             test: /\.(html|css)$/, 
             loader: 'raw-loader'
