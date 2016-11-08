@@ -23,7 +23,7 @@ export var LightBox = (function () {
                 clearTimeout(this.timer);
             if (s) {
                 this._show = true;
-                this.timer = setTimeout(function () {
+                this.timer = window.setTimeout(function () {
                     _this.renderer.setElementClass(_this.host.nativeElement, 'shown', true);
                     _this.timer = null;
                 }, 100);
@@ -32,7 +32,7 @@ export var LightBox = (function () {
                 var wait = parseFloat(this.section &&
                     window.getComputedStyle(this.section.nativeElement)['transition-duration']);
                 this.renderer.setElementClass(this.host.nativeElement, 'shown', false);
-                this.timer = setTimeout(function () {
+                this.timer = window.setTimeout(function () {
                     _this._show = false;
                     _this.timer = null;
                 }, wait * 1000);

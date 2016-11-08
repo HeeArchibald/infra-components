@@ -68,7 +68,7 @@ export class LightBox {
             clearTimeout(this.timer)
         if (s) {
             this._show = true
-            this.timer = setTimeout(() => {
+            this.timer = window.setTimeout(() => {
                 this.renderer.setElementClass(this.host.nativeElement, 'shown', true)
                 this.timer = null
             }, 100)
@@ -76,7 +76,7 @@ export class LightBox {
             let wait = parseFloat(this.section &&
                 window.getComputedStyle(this.section.nativeElement)['transition-duration'])
             this.renderer.setElementClass(this.host.nativeElement, 'shown', false)
-            this.timer = setTimeout(() => {
+            this.timer = window.setTimeout(() => {
                 this._show = false
                 this.timer = null
             }, wait*1000)
@@ -96,7 +96,7 @@ export class LightBox {
 
     /* Internal logic */
     
-    private timer : NodeJS.Timer
+    private timer : number
 
     onClick(event: MouseEvent) {
         if (this.overlay.nativeElement.contains(event.target)) {
