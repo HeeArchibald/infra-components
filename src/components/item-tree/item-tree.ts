@@ -1,13 +1,16 @@
 import { Component, Input, Output, EventEmitter,
-    ViewChild, AfterViewChecked, OnInit, ChangeDetectorRef } from '@angular/core'
+    ViewChild, OnInit, ChangeDetectorRef } from '@angular/core'
 
 @Component({
     selector: 'item-tree',
     template: `
     <ul [ngClass]="{ flattened: isFlattened() }">
         <li *ngFor="let item of (items | flattenObjArray: flatten | filter: filter | orderBy: order:reverse)"
-            [ngClass]="{ selected: isSelected(item), parent: hasChildren(item), root: _depth === 0 }">
-            <a href="javascript:void(0)" (click)="selectItem(item)">{{ display(item) }}</a>
+            [ngClass]="{ selected: isSelected(item), unfolded: !isFolded(item), parent: hasChildren(item), root: _depth === 0 }">
+            <a href="javascript:void(0)" (click)="selectItem(item)">
+                <i class="opener" (click)="toggleFold($event, item)" *ngIf="!disableOpener"></i>
+                {{ display(item) }}
+            </a>
             <item-tree
                 [items]="getChildren(item)"
                 [children]="childrenProperty"
@@ -16,23 +19,25 @@ import { Component, Input, Output, EventEmitter,
                 [order]="order"
                 [reverse]="reverse"
                 [lastSelected]="_lastSelectedItem"
+                [depth]="depth + 1"
+                [disableOpener]="disableOpener"
                 (onSelect)="bubbleSelect($event)"
-                *ngIf="!isFlattened() &&
-                    getChildren(item) &&
-                    isSelected(item)"></item-tree>
+                *ngIf="!isFlattened() && getChildren(item) && !isFolded(item)">
+            </item-tree>
         </li>
     </ul>
     `,
     styles: []
 })
-export class ItemTree<T> implements AfterViewChecked, OnInit {
+export class ItemTree<T> implements OnInit {
 
     constructor(private _changeRef: ChangeDetectorRef){}
 
     /**** Inputs ****/
     
     //Items
-    @Input() private items: Array<T> = []
+    @Input() 
+    private items: Array<T> = []
 
     // Property containing the list of child objects.
     @Input("children") 
@@ -61,6 +66,10 @@ export class ItemTree<T> implements AfterViewChecked, OnInit {
     }
     private _flattenProps = []
 
+    // Disable the opener icon
+    @Input()
+    private disableOpener = false
+
     /**** Outputs ****/
 
     @Output() private onSelect: EventEmitter<T> = new EventEmitter<T>()
@@ -68,19 +77,14 @@ export class ItemTree<T> implements AfterViewChecked, OnInit {
     /**** View ****/
 
     @ViewChild(ItemTree)
-    private childItemTree: ItemTree<T>
+    private childItemTree : ItemTree<T>
 
     /**** Internal Logic ****/
 
     @Input("lastSelected") private _lastSelectedItem : T
     private _selectedItem : T
-    private _depth = 0
-
-    ngAfterViewChecked() : void {
-        if(this.childItemTree){
-            this.childItemTree._depth = this._depth + 1
-        }
-    }
+    @Input("depth") private _depth : number = 0
+    private unfolded: T[] = []
 
     ngOnInit(){
         this.flagIfParent()
@@ -90,6 +94,10 @@ export class ItemTree<T> implements AfterViewChecked, OnInit {
         this._selectedItem = item
         if(this.childItemTree)
             delete this.childItemTree._selectedItem
+        let idx = this.unfolded.indexOf(item)
+        if(!this.disableOpener && idx < 0) {
+            this.unfolded.push(item)
+        }
         this.bubbleSelect(item)
     }
 
@@ -99,7 +107,21 @@ export class ItemTree<T> implements AfterViewChecked, OnInit {
     }
 
     private isSelected(item) {
-        return this._selectedItem === item
+        return (this.disableOpener ? this._selectedItem : this._lastSelectedItem) === item
+    }
+
+    private toggleFold(event: Event, item: T) {
+        event.stopPropagation()
+        let idx = this.unfolded.indexOf(item)
+        if(idx < 0){
+            this.unfolded.push(item)
+        } else {
+            this.unfolded.splice(idx, 1)
+        }
+    }
+
+    private isFolded(item: T) {
+        return this.disableOpener ? !this.isSelected(item) : this.unfolded.indexOf(item) < 0
     }
 
     private display(item) {
@@ -140,6 +162,7 @@ export class ItemTree<T> implements AfterViewChecked, OnInit {
             if(item === this._lastSelectedItem ||
                     findSubItem(item, this._lastSelectedItem)){
                 this._selectedItem = item
+                this.unfolded = [item]
                 break;
             }
         }
