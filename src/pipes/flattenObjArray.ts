@@ -19,7 +19,7 @@ export class FlattenObjectArrayPipe {
                     let val = item[prop]
                     if(val instanceof Array &&
                             !onlyProps ||
-                            onlyProps.indexOf(prop) > -1){
+                            onlyProps.indexOf(prop) > -1) {
                         flattenedArray = [...flattenedArray, ...val]
                         flatten(val)
                     }
@@ -28,7 +28,7 @@ export class FlattenObjectArrayPipe {
         }
         flatten(array)
 
-        return flattenedArray
+        return Array.from(new Set<Object>(flattenedArray))
 
     }
 

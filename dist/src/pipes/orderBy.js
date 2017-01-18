@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Pipe } from '@angular/core';
-export var OrderPipe = (function () {
+var OrderPipe = (function () {
     function OrderPipe() {
     }
     OrderPipe.prototype.transform = function (array, sortPredicate, reverseOrder, compareFn) {
@@ -141,10 +141,11 @@ export var OrderPipe = (function () {
         array = compareValues.map(function (item) { return item.value; });
         return array;
     };
-    OrderPipe = __decorate([
-        Pipe({ name: 'orderBy' }), 
-        __metadata('design:paramtypes', [])
-    ], OrderPipe);
     return OrderPipe;
 }());
+OrderPipe = __decorate([
+    Pipe({ name: 'orderBy' }),
+    __metadata("design:paramtypes", [])
+], OrderPipe);
+export { OrderPipe };
 //# sourceMappingURL=orderBy.js.map

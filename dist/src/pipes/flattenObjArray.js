@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Pipe } from '@angular/core';
-export var FlattenObjectArrayPipe = (function () {
+var FlattenObjectArrayPipe = (function () {
     function FlattenObjectArrayPipe() {
     }
     FlattenObjectArrayPipe.prototype.transform = function (array, onlyProps) {
@@ -33,12 +33,13 @@ export var FlattenObjectArrayPipe = (function () {
             });
         };
         flatten(array);
-        return flattenedArray;
+        return Array.from(new Set(flattenedArray));
     };
-    FlattenObjectArrayPipe = __decorate([
-        Pipe({ name: "flattenObjArray" }), 
-        __metadata('design:paramtypes', [])
-    ], FlattenObjectArrayPipe);
     return FlattenObjectArrayPipe;
 }());
+FlattenObjectArrayPipe = __decorate([
+    Pipe({ name: "flattenObjArray" }),
+    __metadata("design:paramtypes", [])
+], FlattenObjectArrayPipe);
+export { FlattenObjectArrayPipe };
 //# sourceMappingURL=flattenObjArray.js.map

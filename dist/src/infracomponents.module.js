@@ -11,7 +11,7 @@ import './rxjs-extensions';
 import { NgModule } from '@angular/core';
 import * as deps from './module.dependencies';
 import { DynamicModuleImports, LabelsService } from './services';
-export var InfraComponentsModule = (function () {
+var InfraComponentsModule = InfraComponentsModule_1 = (function () {
     function InfraComponentsModule() {
     }
     InfraComponentsModule.forRoot = function (providers) {
@@ -20,19 +20,21 @@ export var InfraComponentsModule = (function () {
             providers['LabelsService'] || LabelsService
         ];
         return {
-            ngModule: InfraComponentsModule,
+            ngModule: InfraComponentsModule_1,
             providers: usedProviders
         };
     };
-    InfraComponentsModule = __decorate([
-        NgModule({
-            imports: deps.imports,
-            declarations: deps.declarations,
-            providers: [],
-            exports: deps.exportList
-        }), 
-        __metadata('design:paramtypes', [])
-    ], InfraComponentsModule);
     return InfraComponentsModule;
 }());
+InfraComponentsModule = InfraComponentsModule_1 = __decorate([
+    NgModule({
+        imports: deps.imports,
+        declarations: deps.declarations,
+        providers: [],
+        exports: deps.exportList
+    }),
+    __metadata("design:paramtypes", [])
+], InfraComponentsModule);
+export { InfraComponentsModule };
+var InfraComponentsModule_1;
 //# sourceMappingURL=infracomponents.module.js.map

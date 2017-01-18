@@ -9,11 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component, Input, Output, EventEmitter, Renderer, ElementRef } from '@angular/core';
 import { LabelsService } from '../../services';
-export var MultiCombo = (function () {
-    function MultiCombo(_eref, _renderer, _labelsService) {
+var MultiCombo = (function () {
+    function MultiCombo(_eref, _renderer, labelsService) {
         this._eref = _eref;
         this._renderer = _renderer;
-        this._labelsService = _labelsService;
+        this.labelsService = labelsService;
         this.self = this;
         this._comboModel = [];
         this.filteredModel = [];
@@ -35,7 +35,7 @@ export var MultiCombo = (function () {
         this.show = false;
     }
     MultiCombo.prototype.labels = function (label) {
-        return this._labelsService.getLabel(label);
+        return this.labelsService.getLabel(label);
     };
     Object.defineProperty(MultiCombo.prototype, "comboModel", {
         set: function (model) {
@@ -66,10 +66,10 @@ export var MultiCombo = (function () {
         }
     };
     MultiCombo.prototype.isSelected = function (item) {
-        return this.filteredModel.indexOf(item) >= 0;
+        return this.filteredModel && this.filteredModel.indexOf(item) >= 0;
     };
     MultiCombo.prototype.isDisabled = function () {
-        return this.maxSelected &&
+        return this.filteredModel && this.maxSelected &&
             this.maxSelected <= this.filteredModel.length;
     };
     MultiCombo.prototype.toggleItem = function (item) {
@@ -98,10 +98,12 @@ export var MultiCombo = (function () {
     };
     MultiCombo.prototype.displayItem = function (item) {
         return item instanceof Object ?
-            this.display ?
+            this.display && typeof this.display === "string" ?
                 item[this.display] :
                 item.toString() :
-            item;
+            this.display && this.display instanceof Function ?
+                this.display(item || '') :
+                item;
     };
     MultiCombo.prototype.onClick = function (event) {
         if (this.show && !this._eref.nativeElement.contains(event.target)) {
@@ -112,78 +114,88 @@ export var MultiCombo = (function () {
     MultiCombo.prototype.getFilter = function () {
         if (!this.filter)
             return "";
-        var filter = {};
-        filter[this.filter] = this.search.input;
+        var filter = "";
+        if (this._comboModel.length > 0) {
+            if (typeof this._comboModel[0] === 'string') {
+                filter = this.search.input;
+            }
+            else {
+                filter = {};
+                filter[this.filter] = this.search.input;
+            }
+        }
         return filter;
     };
-    __decorate([
-        Input(), 
-        __metadata('design:type', Object), 
-        __metadata('design:paramtypes', [Object])
-    ], MultiCombo.prototype, "comboModel", null);
-    __decorate([
-        Input("outputModel"), 
-        __metadata('design:type', Object)
-    ], MultiCombo.prototype, "filteredModel", void 0);
-    __decorate([
-        Input(), 
-        __metadata('design:type', String)
-    ], MultiCombo.prototype, "title", void 0);
-    __decorate([
-        Input(), 
-        __metadata('design:type', String)
-    ], MultiCombo.prototype, "display", void 0);
-    __decorate([
-        Input(), 
-        __metadata('design:type', String)
-    ], MultiCombo.prototype, "filter", void 0);
-    __decorate([
-        Input(), 
-        __metadata('design:type', Object)
-    ], MultiCombo.prototype, "orderBy", void 0);
-    __decorate([
-        Input(), 
-        __metadata('design:type', Boolean)
-    ], MultiCombo.prototype, "reverse", void 0);
-    __decorate([
-        Input("max"), 
-        __metadata('design:type', Number)
-    ], MultiCombo.prototype, "maxSelected", void 0);
-    __decorate([
-        Input(), 
-        __metadata('design:type', Boolean)
-    ], MultiCombo.prototype, "disabled", void 0);
-    __decorate([
-        Output(), 
-        __metadata('design:type', Object)
-    ], MultiCombo.prototype, "onSelectItem", void 0);
-    __decorate([
-        Output(), 
-        __metadata('design:type', Object)
-    ], MultiCombo.prototype, "onDeselectItem", void 0);
-    __decorate([
-        Output("outputModelChange"), 
-        __metadata('design:type', Object)
-    ], MultiCombo.prototype, "filteredModelChange", void 0);
-    __decorate([
-        Output(), 
-        __metadata('design:type', Object)
-    ], MultiCombo.prototype, "onOpen", void 0);
-    __decorate([
-        Output(), 
-        __metadata('design:type', Object)
-    ], MultiCombo.prototype, "onClose", void 0);
-    MultiCombo = __decorate([
-        Component({
-            selector: 'multi-combo',
-            templateUrl: './multi-combo.html',
-            styleUrls: ['./multi-combo.css'],
-            host: {
-                '(document:click)': 'onClick($event)',
-            }
-        }), 
-        __metadata('design:paramtypes', [ElementRef, Renderer, LabelsService])
-    ], MultiCombo);
     return MultiCombo;
 }());
+__decorate([
+    Input(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [Object])
+], MultiCombo.prototype, "comboModel", null);
+__decorate([
+    Input("outputModel"),
+    __metadata("design:type", Object)
+], MultiCombo.prototype, "filteredModel", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", String)
+], MultiCombo.prototype, "title", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], MultiCombo.prototype, "display", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", String)
+], MultiCombo.prototype, "filter", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], MultiCombo.prototype, "orderBy", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Boolean)
+], MultiCombo.prototype, "reverse", void 0);
+__decorate([
+    Input("max"),
+    __metadata("design:type", Number)
+], MultiCombo.prototype, "maxSelected", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Boolean)
+], MultiCombo.prototype, "disabled", void 0);
+__decorate([
+    Output(),
+    __metadata("design:type", Object)
+], MultiCombo.prototype, "onSelectItem", void 0);
+__decorate([
+    Output(),
+    __metadata("design:type", Object)
+], MultiCombo.prototype, "onDeselectItem", void 0);
+__decorate([
+    Output("outputModelChange"),
+    __metadata("design:type", Object)
+], MultiCombo.prototype, "filteredModelChange", void 0);
+__decorate([
+    Output(),
+    __metadata("design:type", Object)
+], MultiCombo.prototype, "onOpen", void 0);
+__decorate([
+    Output(),
+    __metadata("design:type", Object)
+], MultiCombo.prototype, "onClose", void 0);
+MultiCombo = __decorate([
+    Component({
+        selector: 'multi-combo',
+        templateUrl: './multi-combo.html',
+        styleUrls: ['./multi-combo.css'],
+        host: {
+            '(document:click)': 'onClick($event)',
+        }
+    }),
+    __metadata("design:paramtypes", [ElementRef, Renderer,
+        LabelsService])
+], MultiCombo);
+export { MultiCombo };
 //# sourceMappingURL=multi-combo.js.map

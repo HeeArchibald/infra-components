@@ -8,29 +8,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Pipe } from '@angular/core';
-export var FilterPipe = (function () {
+var FilterPipe = (function () {
     function FilterPipe() {
     }
+    FilterPipe.prototype.stringFullCompare = function (str1, str2) {
+        return str1.match(new RegExp(str2, 'i')) !== null;
+    };
     FilterPipe.prototype._filterString = function (value, filter, arrayRef) {
         if (typeof value === "string" &&
             typeof filter === "string" &&
             filter.trim() &&
-            value.match(new RegExp(filter, 'i'))) {
+            this.stringFullCompare(value, filter)) {
             arrayRef.push(value);
             return true;
         }
         return false;
     };
     FilterPipe.prototype._filterObject = function (value, filter, arrayRef) {
-        if (typeof value == "object" &&
-            typeof filter === "object") {
+        if (typeof value == "object" && typeof filter === "object") {
             var check = true;
             for (var property in filter) {
-                if (value[property] && typeof value[property] === "string") {
-                    if (!value[property].match(new RegExp(filter[property], 'i'))) {
-                        check = false;
-                        break;
+                if (!check)
+                    break;
+                var filterValue = filter[property];
+                var checkedValue = value[property];
+                if (typeof filterValue === "string" && typeof checkedValue === "string") {
+                    check = this.stringFullCompare(checkedValue, filterValue);
+                }
+                else if (filterValue instanceof Array && typeof checkedValue === "string") {
+                    for (var i = 0; i < filterValue.length; i++) {
+                        check = this.stringFullCompare(checkedValue, filterValue[i]);
+                        if (check)
+                            break;
                     }
+                }
+                else if (filterValue instanceof Function) {
+                    check = filterValue(checkedValue);
                 }
             }
             if (check) {
@@ -58,15 +71,15 @@ export var FilterPipe = (function () {
         array.forEach(function (item) {
             _this._filterString(item, by, filteredArray) ||
                 _this._filterObject(item, by, filteredArray) ||
-                _this._filterFunction(item, by, filteredArray) ||
-                (filteredArray = array);
+                _this._filterFunction(item, by, filteredArray);
         });
         return filteredArray;
     };
-    FilterPipe = __decorate([
-        Pipe({ name: 'filter' }), 
-        __metadata('design:paramtypes', [])
-    ], FilterPipe);
     return FilterPipe;
 }());
+FilterPipe = __decorate([
+    Pipe({ name: 'filter', pure: false }),
+    __metadata("design:paramtypes", [])
+], FilterPipe);
+export { FilterPipe };
 //# sourceMappingURL=filter.js.map

@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Pipe } from '@angular/core';
-export var StorePipe = (function () {
+var StorePipe = (function () {
     function StorePipe() {
     }
     StorePipe.prototype.transform = function (value, context, prop) {
@@ -16,12 +16,13 @@ export var StorePipe = (function () {
         context[prop] = value;
         return value;
     };
-    StorePipe = __decorate([
-        Pipe({
-            name: "store"
-        }), 
-        __metadata('design:paramtypes', [])
-    ], StorePipe);
     return StorePipe;
 }());
+StorePipe = __decorate([
+    Pipe({
+        name: "store"
+    }),
+    __metadata("design:paramtypes", [])
+], StorePipe);
+export { StorePipe };
 //# sourceMappingURL=store.js.map

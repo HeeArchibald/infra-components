@@ -3,8 +3,8 @@ import { LabelsService } from '../../services';
 export declare class MultiCombo {
     private _eref;
     private _renderer;
-    private _labelsService;
-    constructor(_eref: ElementRef, _renderer: Renderer, _labelsService: LabelsService);
+    private labelsService;
+    constructor(_eref: ElementRef, _renderer: Renderer, labelsService: LabelsService);
     private self;
     private labels(label);
     private comboModel;

@@ -15,6 +15,9 @@
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors": true
     },
+    "include": [
+        "../src/**/*"
+    ],
     "exclude": [
         "assets",
         "build",

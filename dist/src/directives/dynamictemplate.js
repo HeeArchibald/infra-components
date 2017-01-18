@@ -11,7 +11,7 @@ import { NgModule, Component, Directive, Input, ElementRef, ViewContainerRef, Re
 import { CommonModule } from '@angular/common';
 import { InfraComponentsModule } from '../infracomponents.module';
 import { DynamicModuleImports } from '../services/dynamicModuleImports';
-export var DynamicTemplate = (function () {
+var DynamicTemplate = (function () {
     function DynamicTemplate(elementRef, viewContainer, compiler, dynamicModuleImports) {
         this.elementRef = elementRef;
         this.viewContainer = viewContainer;
@@ -83,21 +83,25 @@ export var DynamicTemplate = (function () {
         enumerable: true,
         configurable: true
     });
-    __decorate([
-        Input(), 
-        __metadata('design:type', Object)
-    ], DynamicTemplate.prototype, "context", void 0);
-    __decorate([
-        Input("template"), 
-        __metadata('design:type', String), 
-        __metadata('design:paramtypes', [String])
-    ], DynamicTemplate.prototype, "templateContents", null);
-    DynamicTemplate = __decorate([
-        Directive({
-            selector: 'dynamic-template'
-        }), 
-        __metadata('design:paramtypes', [ElementRef, ViewContainerRef, Compiler, DynamicModuleImports])
-    ], DynamicTemplate);
     return DynamicTemplate;
 }());
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], DynamicTemplate.prototype, "context", void 0);
+__decorate([
+    Input("template"),
+    __metadata("design:type", String),
+    __metadata("design:paramtypes", [String])
+], DynamicTemplate.prototype, "templateContents", null);
+DynamicTemplate = __decorate([
+    Directive({
+        selector: 'dynamic-template'
+    }),
+    __metadata("design:paramtypes", [ElementRef,
+        ViewContainerRef,
+        Compiler,
+        DynamicModuleImports])
+], DynamicTemplate);
+export { DynamicTemplate };
 //# sourceMappingURL=dynamictemplate.js.map

@@ -1,8 +1,9 @@
-import { Renderer, ElementRef, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-export declare class SearchInput implements OnInit, OnDestroy, AfterViewInit {
+import { Renderer, ChangeDetectorRef, ElementRef, OnInit, OnDestroy, DoCheck } from '@angular/core';
+export declare class SearchInput implements OnInit, OnDestroy, DoCheck {
     private _elRef;
+    private _cdRef;
     private _renderer;
-    constructor(_elRef: ElementRef, _renderer: Renderer);
+    constructor(_elRef: ElementRef, _cdRef: ChangeDetectorRef, _renderer: Renderer);
     private delay;
     private _delay;
     private onChange;
@@ -10,8 +11,9 @@ export declare class SearchInput implements OnInit, OnDestroy, AfterViewInit {
     private searchTerms;
     private observable;
     private observer;
+    private evalAttributes();
     ngOnInit(): void;
-    ngAfterViewInit(): void;
+    ngDoCheck(): void;
     ngOnDestroy(): void;
     search(str: string): void;
 }

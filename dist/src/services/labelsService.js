@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Injectable } from '@angular/core';
-export var LabelsService = (function () {
+var LabelsService = LabelsService_1 = (function () {
     function LabelsService() {
         this.labels = {
             "select.all": "Select all",
@@ -25,16 +25,18 @@ export var LabelsService = (function () {
         }
     };
     LabelsService.withLabels = function (labels) {
-        var newService = new LabelsService();
+        var newService = new LabelsService_1();
         for (var prop in labels) {
             newService.labels[prop] = labels[prop];
         }
         return newService;
     };
-    LabelsService = __decorate([
-        Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], LabelsService);
     return LabelsService;
 }());
+LabelsService = LabelsService_1 = __decorate([
+    Injectable(),
+    __metadata("design:paramtypes", [])
+], LabelsService);
+export { LabelsService };
+var LabelsService_1;
 //# sourceMappingURL=labelsService.js.map

@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, Input, Output, EventEmitter, ViewChild, ChangeDetectorRef } from '@angular/core';
-export var ItemTree = (function () {
+var ItemTree = ItemTree_1 = (function () {
     function ItemTree(_changeRef) {
         this._changeRef = _changeRef;
         this.items = [];
@@ -108,65 +108,67 @@ export var ItemTree = (function () {
                 break;
             }
         }
-        setTimeout(function () { _this._changeRef.detectChanges(); }, 1);
+        this._changeRef.markForCheck();
     };
-    __decorate([
-        Input(), 
-        __metadata('design:type', Array)
-    ], ItemTree.prototype, "items", void 0);
-    __decorate([
-        Input("children"), 
-        __metadata('design:type', String)
-    ], ItemTree.prototype, "childrenProperty", void 0);
-    __decorate([
-        Input("display"), 
-        __metadata('design:type', String)
-    ], ItemTree.prototype, "displayProperty", void 0);
-    __decorate([
-        Input(), 
-        __metadata('design:type', Object)
-    ], ItemTree.prototype, "filter", void 0);
-    __decorate([
-        Input(), 
-        __metadata('design:type', Object)
-    ], ItemTree.prototype, "order", void 0);
-    __decorate([
-        Input(), 
-        __metadata('design:type', Boolean)
-    ], ItemTree.prototype, "reverse", void 0);
-    __decorate([
-        Input(), 
-        __metadata('design:type', Array), 
-        __metadata('design:paramtypes', [Array])
-    ], ItemTree.prototype, "flatten", null);
-    __decorate([
-        Input(), 
-        __metadata('design:type', Object)
-    ], ItemTree.prototype, "disableOpener", void 0);
-    __decorate([
-        Output(), 
-        __metadata('design:type', EventEmitter)
-    ], ItemTree.prototype, "onSelect", void 0);
-    __decorate([
-        ViewChild(ItemTree), 
-        __metadata('design:type', ItemTree)
-    ], ItemTree.prototype, "childItemTree", void 0);
-    __decorate([
-        Input("lastSelected"), 
-        __metadata('design:type', Object)
-    ], ItemTree.prototype, "_lastSelectedItem", void 0);
-    __decorate([
-        Input("depth"), 
-        __metadata('design:type', Number)
-    ], ItemTree.prototype, "_depth", void 0);
-    ItemTree = __decorate([
-        Component({
-            selector: 'item-tree',
-            template: "\n    <ul [ngClass]=\"{ flattened: isFlattened() }\">\n        <li *ngFor=\"let item of (items | flattenObjArray: flatten | filter: filter | orderBy: order:reverse)\"\n            [ngClass]=\"{ selected: isSelected(item), unfolded: !isFolded(item), parent: hasChildren(item), root: _depth === 0 }\">\n            <a href=\"javascript:void(0)\" (click)=\"selectItem(item)\">\n                <i class=\"opener\" (click)=\"toggleFold($event, item)\" *ngIf=\"!disableOpener\"></i>\n                {{ display(item) }}\n            </a>\n            <item-tree\n                [items]=\"getChildren(item)\"\n                [children]=\"childrenProperty\"\n                [display]=\"displayProperty\"\n                [filter]=\"filter\"\n                [order]=\"order\"\n                [reverse]=\"reverse\"\n                [lastSelected]=\"_lastSelectedItem\"\n                [depth]=\"depth + 1\"\n                [disableOpener]=\"disableOpener\"\n                (onSelect)=\"bubbleSelect($event)\"\n                *ngIf=\"!isFlattened() && getChildren(item) && !isFolded(item)\">\n            </item-tree>\n        </li>\n    </ul>\n    ",
-            styles: []
-        }), 
-        __metadata('design:paramtypes', [ChangeDetectorRef])
-    ], ItemTree);
     return ItemTree;
 }());
+__decorate([
+    Input(),
+    __metadata("design:type", Array)
+], ItemTree.prototype, "items", void 0);
+__decorate([
+    Input("children"),
+    __metadata("design:type", String)
+], ItemTree.prototype, "childrenProperty", void 0);
+__decorate([
+    Input("display"),
+    __metadata("design:type", String)
+], ItemTree.prototype, "displayProperty", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], ItemTree.prototype, "filter", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], ItemTree.prototype, "order", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Boolean)
+], ItemTree.prototype, "reverse", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Array),
+    __metadata("design:paramtypes", [Array])
+], ItemTree.prototype, "flatten", null);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], ItemTree.prototype, "disableOpener", void 0);
+__decorate([
+    Output(),
+    __metadata("design:type", EventEmitter)
+], ItemTree.prototype, "onSelect", void 0);
+__decorate([
+    ViewChild(ItemTree_1),
+    __metadata("design:type", ItemTree)
+], ItemTree.prototype, "childItemTree", void 0);
+__decorate([
+    Input("lastSelected"),
+    __metadata("design:type", Object)
+], ItemTree.prototype, "_lastSelectedItem", void 0);
+__decorate([
+    Input("depth"),
+    __metadata("design:type", Number)
+], ItemTree.prototype, "_depth", void 0);
+ItemTree = ItemTree_1 = __decorate([
+    Component({
+        selector: 'item-tree',
+        template: "\n    <ul [ngClass]=\"{ flattened: isFlattened() }\">\n        <li *ngFor=\"let item of (items | flattenObjArray: flatten | filter: filter | orderBy: order:reverse)\"\n            [ngClass]=\"{ selected: isSelected(item), unfolded: !isFolded(item), parent: hasChildren(item), root: _depth === 0 }\">\n            <a href=\"javascript:void(0)\" (click)=\"selectItem(item)\">\n                <i class=\"opener\" (click)=\"toggleFold($event, item)\"\n                    *ngIf=\"!isFlattened() && hasChildren(item) && !disableOpener\"></i>\n                {{ display(item) }}\n            </a>\n            <item-tree\n                [items]=\"getChildren(item)\"\n                [children]=\"childrenProperty\"\n                [display]=\"displayProperty\"\n                [filter]=\"filter\"\n                [order]=\"order\"\n                [reverse]=\"reverse\"\n                [lastSelected]=\"_lastSelectedItem\"\n                [depth]=\"depth + 1\"\n                [disableOpener]=\"disableOpener\"\n                (onSelect)=\"bubbleSelect($event)\"\n                *ngIf=\"!isFlattened() && hasChildren(item) && !isFolded(item)\">\n            </item-tree>\n        </li>\n    </ul>\n    ",
+        styles: []
+    }),
+    __metadata("design:paramtypes", [ChangeDetectorRef])
+], ItemTree);
+export { ItemTree };
+var ItemTree_1;
 //# sourceMappingURL=item-tree.js.map

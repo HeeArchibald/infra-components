@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
-export var PushPanel = (function () {
+var PushPanel = (function () {
     function PushPanel(_eref) {
         this._eref = _eref;
         this.onClose = new EventEmitter();
@@ -32,34 +32,35 @@ export var PushPanel = (function () {
         }
         return true;
     };
-    __decorate([
-        Input(), 
-        __metadata('design:type', Boolean), 
-        __metadata('design:paramtypes', [Boolean])
-    ], PushPanel.prototype, "toggle", null);
-    __decorate([
-        Input(), 
-        __metadata('design:type', Object)
-    ], PushPanel.prototype, "opener", void 0);
-    __decorate([
-        Output(), 
-        __metadata('design:type', Object)
-    ], PushPanel.prototype, "onClose", void 0);
-    __decorate([
-        ViewChild("inside"), 
-        __metadata('design:type', ElementRef)
-    ], PushPanel.prototype, "inside", void 0);
-    PushPanel = __decorate([
-        Component({
-            selector: 'push-panel',
-            template: "\n    <div [ngClass]=\"{ opened: _opened }\" #inside>\n        <ng-content select=\"[inside]\"></ng-content>\n    </div>\n    <div>\n        <ng-content select=\"[companion]\"></ng-content>\n    </div>\n    ",
-            styles: ["\n        :host > div:nth-child(1) {\n            position: fixed;\n            z-index: 10;\n            overflow-x: hidden;\n            overflow-y: scroll;\n            height: 100%;\n            top: 0px;\n            left: -30%;\n            width: 30%;\n            transition: transform 0.25s;\n        }\n        :host > div:nth-child(1).opened {\n            transform: translateX(100%);\n        }\n        :host > div:nth-child(2) {\n            position: relative;\n            left: 0%;\n            opacity: 1;\n            transition: transform 0.25s, opacity 0.25s;\n        }\n        :host > div:nth-child(1).opened + div {\n            opacity: 0.7;\n            transform: translateX(30%);\n            overflow-x: hidden;\n        }\n    "],
-            host: {
-                '(document:click)': 'onClick($event)',
-            }
-        }), 
-        __metadata('design:paramtypes', [ElementRef])
-    ], PushPanel);
     return PushPanel;
 }());
+__decorate([
+    Input(),
+    __metadata("design:type", Boolean),
+    __metadata("design:paramtypes", [Boolean])
+], PushPanel.prototype, "toggle", null);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], PushPanel.prototype, "opener", void 0);
+__decorate([
+    Output(),
+    __metadata("design:type", Object)
+], PushPanel.prototype, "onClose", void 0);
+__decorate([
+    ViewChild("inside"),
+    __metadata("design:type", ElementRef)
+], PushPanel.prototype, "inside", void 0);
+PushPanel = __decorate([
+    Component({
+        selector: 'push-panel',
+        template: "\n    <div [ngClass]=\"{ opened: _opened }\" #inside>\n        <ng-content select=\"[inside]\"></ng-content>\n    </div>\n    <div>\n        <ng-content select=\"[companion]\"></ng-content>\n    </div>\n    ",
+        styles: ["\n        :host > div:nth-child(1) {\n            position: fixed;\n            z-index: 10;\n            overflow-x: hidden;\n            overflow-y: scroll;\n            height: 100%;\n            top: 0px;\n            left: -30%;\n            width: 30%;\n            transition: transform 0.25s;\n        }\n        :host > div:nth-child(1).opened {\n            transform: translateX(100%);\n        }\n        :host > div:nth-child(2) {\n            position: relative;\n            left: 0%;\n            opacity: 1;\n            transition: transform 0.25s, opacity 0.25s;\n        }\n        :host > div:nth-child(1).opened + div {\n            opacity: 0.7;\n            transform: translateX(30%);\n            overflow-x: hidden;\n        }\n    "],
+        host: {
+            '(document:click)': 'onClick($event)',
+        }
+    }),
+    __metadata("design:paramtypes", [ElementRef])
+], PushPanel);
+export { PushPanel };
 //# sourceMappingURL=push-panel.js.map

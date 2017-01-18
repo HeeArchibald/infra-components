@@ -1,10 +1,11 @@
-import { Component, ViewChild, ElementRef, 
+import { ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, ElementRef,
     EventEmitter, Renderer, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'light-box',
     template: `
-        <section [hidden]="!show" #section>
+        <section *ngIf="_show" #section>
             <div overlay #overlay></div>
             <div content>
                 <ng-content></ng-content>
@@ -57,7 +58,9 @@ import { Component, ViewChild, ElementRef,
 })
 export class LightBox {
 
-    constructor(private renderer: Renderer,
+    constructor(
+        private cdRef: ChangeDetectorRef,
+        private renderer: Renderer,
         private host: ElementRef) { }
 
     /* Inputs */
@@ -71,6 +74,7 @@ export class LightBox {
             this.timer = window.setTimeout(() => {
                 this.renderer.setElementClass(this.host.nativeElement, 'shown', true)
                 this.timer = null
+                this.cdRef.markForCheck()
             }, 100)
         } else {
             let wait = parseFloat(this.section &&
@@ -79,6 +83,7 @@ export class LightBox {
             this.timer = window.setTimeout(() => {
                 this._show = false
                 this.timer = null
+                this.cdRef.markForCheck()
             }, wait*1000)
         }
     }
@@ -95,7 +100,7 @@ export class LightBox {
     @ViewChild("overlay") overlay : ElementRef
 
     /* Internal logic */
-    
+
     private timer : number
 
     onClick(event: MouseEvent) {

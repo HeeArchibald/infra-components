@@ -7,16 +7,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Injectable } from '@angular/core';
-var DynamicModuleImports = (function () {
-    function DynamicModuleImports() {
-        this.imports = [];
+import { Pipe } from '@angular/core';
+var LimitPipe = (function () {
+    function LimitPipe() {
     }
-    return DynamicModuleImports;
+    LimitPipe.prototype.transform = function (array, limit, offset) {
+        if (offset === void 0) { offset = 0; }
+        return array.slice(offset, limit);
+    };
+    return LimitPipe;
 }());
-DynamicModuleImports = __decorate([
-    Injectable(),
+LimitPipe = __decorate([
+    Pipe({
+        name: "limit",
+        pure: false
+    }),
     __metadata("design:paramtypes", [])
-], DynamicModuleImports);
-export { DynamicModuleImports };
-//# sourceMappingURL=dynamicModuleImports.js.map
+], LimitPipe);
+export { LimitPipe };
+//# sourceMappingURL=limit.js.map

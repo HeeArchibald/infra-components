@@ -8,7 +8,8 @@ import { Component, Input, Output, EventEmitter,
         <li *ngFor="let item of (items | flattenObjArray: flatten | filter: filter | orderBy: order:reverse)"
             [ngClass]="{ selected: isSelected(item), unfolded: !isFolded(item), parent: hasChildren(item), root: _depth === 0 }">
             <a href="javascript:void(0)" (click)="selectItem(item)">
-                <i class="opener" (click)="toggleFold($event, item)" *ngIf="!disableOpener"></i>
+                <i class="opener" (click)="toggleFold($event, item)"
+                    *ngIf="!isFlattened() && hasChildren(item) && !disableOpener"></i>
                 {{ display(item) }}
             </a>
             <item-tree
@@ -22,7 +23,7 @@ import { Component, Input, Output, EventEmitter,
                 [depth]="depth + 1"
                 [disableOpener]="disableOpener"
                 (onSelect)="bubbleSelect($event)"
-                *ngIf="!isFlattened() && getChildren(item) && !isFolded(item)">
+                *ngIf="!isFlattened() && hasChildren(item) && !isFolded(item)">
             </item-tree>
         </li>
     </ul>
@@ -34,18 +35,18 @@ export class ItemTree<T> implements OnInit {
     constructor(private _changeRef: ChangeDetectorRef){}
 
     /**** Inputs ****/
-    
+
     //Items
-    @Input() 
+    @Input()
     private items: Array<T> = []
 
     // Property containing the list of child objects.
-    @Input("children") 
+    @Input("children")
     private childrenProperty: string = "children"
-    // Property to display in the list 
-    @Input("display") 
+    // Property to display in the list
+    @Input("display")
     private displayProperty: string = "label"
-    // Filter pipe argument 
+    // Filter pipe argument
     @Input() private filter: (Object | string | Function) = ""
     // OrderBy pipe argument
     @Input() private order: (Array<any> | string | Function) = []
@@ -167,7 +168,7 @@ export class ItemTree<T> implements OnInit {
             }
         }
 
-        setTimeout(() => {this._changeRef.detectChanges()}, 1)
+        this._changeRef.markForCheck()
     }
 
 }

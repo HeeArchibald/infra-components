@@ -13,12 +13,12 @@ import { LabelsService } from '../../services'
 })
 export class MultiCombo {
 
-    constructor(private _eref: ElementRef, private _renderer: Renderer, 
-        private _labelsService: LabelsService){}
-        
+    constructor(private _eref: ElementRef, private _renderer: Renderer,
+        private labelsService: LabelsService){}
+
     private self = this
     private labels(label){
-        return this._labelsService.getLabel(label)
+        return this.labelsService.getLabel(label)
     }
 
     /**** Inputs ****/
@@ -44,7 +44,7 @@ export class MultiCombo {
     @Input("outputModel") private filteredModel = []
 
     @Input() private title: string = "Select"
-    @Input() private display: string
+    @Input() private display: string | Function
     @Input() private filter: string
     @Input() private orderBy: (string | Array<(string | Function)> | Function)
     @Input() private reverse: boolean = false
@@ -82,11 +82,11 @@ export class MultiCombo {
     }
 
     private isSelected(item) {
-        return this.filteredModel.indexOf(item) >= 0
+        return this.filteredModel && this.filteredModel.indexOf(item) >= 0
     }
 
     private isDisabled() {
-        return this.maxSelected &&
+        return this.filteredModel && this.maxSelected &&
             this.maxSelected <= this.filteredModel.length
     }
 
@@ -117,11 +117,13 @@ export class MultiCombo {
     }
 
     private displayItem(item) {
-        return item instanceof Object ?
-            this.display ?
-                item[this.display] :
-                item.toString() :
-            item
+        return  item instanceof Object ?
+                    this.display && typeof this.display === "string" ?
+                        item[this.display] :
+                        item.toString() :
+                    this.display && this.display instanceof Function ?
+                        this.display(item || '') :
+                        item
     }
 
     private onClick(event) {
@@ -134,8 +136,15 @@ export class MultiCombo {
     private getFilter() {
         if(!this.filter)
             return ""
-        let filter = {}
-        filter[this.filter] = this.search.input
+        let filter : string | {} = ""
+        if(this._comboModel.length > 0 ){
+            if(typeof this._comboModel[0] === 'string'){
+                filter = this.search.input
+            } else {
+                filter = {}
+                filter[this.filter] = this.search.input
+            }
+        }
         return filter
     }
 

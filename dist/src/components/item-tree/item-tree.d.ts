@@ -1,4 +1,3 @@
-/// <reference types="core-js" />
 import { OnInit, ChangeDetectorRef } from '@angular/core';
 export declare class ItemTree<T> implements OnInit {
     private _changeRef;

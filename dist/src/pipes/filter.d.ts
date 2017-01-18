@@ -1,6 +1,6 @@
-/// <reference types="core-js" />
 import { PipeTransform } from '@angular/core';
 export declare class FilterPipe implements PipeTransform {
+    private stringFullCompare(str1, str2);
     private _filterString(value, filter, arrayRef);
     private _filterObject(value, filter, arrayRef);
     private _filterFunction(value, filter, arrayRef);

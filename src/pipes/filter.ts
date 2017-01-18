@@ -1,13 +1,17 @@
 import { Pipe, PipeTransform } from '@angular/core'
 
-@Pipe({name: 'filter'})
+@Pipe({name: 'filter', pure: false})
 export class FilterPipe implements PipeTransform {
+
+    private stringFullCompare(str1: string, str2: string) : boolean {
+        return str1.match(new RegExp(str2, 'i')) !== null
+    }
 
     private _filterString(value, filter, arrayRef: Array<String>) {
         if(typeof value === "string" &&
                 typeof filter === "string" &&
                 filter.trim() &&
-                value.match(new RegExp(filter, 'i'))){
+                this.stringFullCompare(value, filter)) {
             arrayRef.push(value)
             return true
         }
@@ -15,15 +19,24 @@ export class FilterPipe implements PipeTransform {
     }
 
     private _filterObject(value, filter, arrayRef: Array<Object>) {
-         if (typeof value == "object" &&
-                typeof filter === "object") {
+         if (typeof value == "object" && typeof filter === "object") {
             let check = true
-            for(let property in filter){
-                if(value[property] && typeof value[property] === "string") {
-                    if(!(<string> value[property]).match(new RegExp(filter[property], 'i'))) {
-                        check = false
-                        break;
+            for(let property in filter) {
+                if(!check)
+                    break;
+
+                let filterValue = filter[property]
+                let checkedValue = value[property]
+
+                if(typeof filterValue === "string" && typeof checkedValue === "string") {
+                    check = this.stringFullCompare(checkedValue, filterValue)
+                } else if(filterValue instanceof Array && typeof checkedValue === "string") {
+                    for(let i = 0; i < filterValue.length; i++) {
+                        check = this.stringFullCompare(checkedValue, filterValue[i])
+                        if(check) break;
                     }
+                } else if(filterValue instanceof Function) {
+                    check = filterValue(checkedValue)
                 }
             }
             if(check){
@@ -45,7 +58,6 @@ export class FilterPipe implements PipeTransform {
     }
 
     transform(array: Array<string | Object>, by: (string | Object | Function)) {
-
         if(!array || !by){
             return array
         }
@@ -55,8 +67,7 @@ export class FilterPipe implements PipeTransform {
         array.forEach(item => {
             this._filterString(item, by, filteredArray) ||
                 this._filterObject(item, by, filteredArray) ||
-                    this._filterFunction(item, by, filteredArray) ||
-                        (filteredArray = array)
+                    this._filterFunction(item, by, filteredArray)
         })
 
         return filteredArray

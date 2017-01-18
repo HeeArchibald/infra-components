@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, Renderer,
-    ElementRef, ViewChild, OnInit, OnDestroy, AfterViewInit } from '@angular/core'
+import { Component, Input, Output, EventEmitter, Renderer, ChangeDetectorRef,
+    ElementRef, ViewChild, OnInit, OnDestroy, DoCheck } from '@angular/core'
 import { Subject }          from 'rxjs/Subject'
 import { Observable }       from 'rxjs/Observable'
 import { Subscription }     from 'rxjs/Subscription'
@@ -10,9 +10,10 @@ import { Subscription }     from 'rxjs/Subscription'
         <input type="search" #searchBox (input)="search(searchBox.value)"/>
     `
 })
-export class SearchInput implements OnInit, OnDestroy, AfterViewInit {
+export class SearchInput implements OnInit, OnDestroy, DoCheck {
 
     constructor(private _elRef : ElementRef,
+        private _cdRef: ChangeDetectorRef,
         private _renderer : Renderer){}
 
     /* Inputs / Outputs / View */
@@ -38,10 +39,20 @@ export class SearchInput implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild("searchBox") private searchBox : ElementRef
 
     /* Internal logic */
-    
+
     private searchTerms = new Subject<string>()
     private observable : Observable<string>
     private observer : Subscription
+
+    private evalAttributes() {
+        let element = this._elRef.nativeElement
+        if(element && this.searchBox) {
+            for(let i = 0; i < element.attributes.length; i++){
+                let attr = element.attributes[i]
+                this._renderer.setElementAttribute(this.searchBox.nativeElement, attr.name, attr.value)
+            }
+        }
+    }
 
     ngOnInit() : void {
         if(!this.observable){
@@ -54,14 +65,8 @@ export class SearchInput implements OnInit, OnDestroy, AfterViewInit {
         }
     }
 
-    ngAfterViewInit() : void {
-        let element = this._elRef.nativeElement
-        if(element && this.searchBox) {
-            for(let i = 0; i < element.attributes.length; i++){
-                let attr = element.attributes[i]
-                this._renderer.setElementAttribute(this.searchBox.nativeElement, attr.name, attr.value)
-            }
-        }
+    ngDoCheck() : void {
+        this.evalAttributes()
     }
 
     ngOnDestroy() : void {
