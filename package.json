@@ -22,25 +22,26 @@
     "dist/"
   ],
   "scripts": {
-    "start": "npm run clean && webpack --config ./config/webpack.config.bundle.js && tsc",
+    "start": "npm run clean && webpack --config ./config/webpack.config.bundle.js && ngc",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "clean": "rm -Rf dist"
+    "clean": "rimraf dist && rimraf aot"
   },
   "peerDependencies": {
-    "@angular/common": "~2.3.0",
-    "@angular/core": "~2.3.0",
-    "@angular/forms": "~2.3.0",
-    "rxjs": "5.0.0-rc.4"
+    "@angular/common": "~4.0.0-beta.6",
+    "@angular/core": "~4.0.0-beta.6",
+    "@angular/forms": "~4.0.0-beta.6",
+    "rxjs": "^5.0.1"
   },
   "devDependencies": {
-    "@angular/common": "~2.3.0",
-    "@angular/compiler": "~2.3.0",
-    "@angular/core": "~2.3.0",
-    "@angular/forms": "~2.3.0",
-    "@angular/http": "~2.3.0",
-    "@angular/platform-browser": "~2.3.0",
-    "@angular/platform-browser-dynamic": "~2.3.0",
+    "@angular/common": "~4.0.0-beta.6",
+    "@angular/compiler": "~4.0.0-beta.6",
+    "@angular/compiler-cli": "^4.0.0-beta.6",
+    "@angular/core": "~4.0.0-beta.6",
+    "@angular/forms": "~4.0.0-beta.6",
+    "@angular/http": "~4.0.0-beta.6",
+    "@angular/platform-browser": "~4.0.0-beta.6",
+    "@angular/platform-browser-dynamic": "~4.0.0-beta.6",
     "@types/core-js": "^0.9.34",
     "@types/node": "^6.0.45",
     "angular2-template-loader": "^0.4.0",
@@ -51,8 +52,9 @@
     "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.15.0",
     "raw-loader": "^0.5.1",
+    "rimraf": "^2.6.0",
     "rollup-plugin-typescript": "^0.8.1",
-    "rxjs": "5.0.0-rc.4",
+    "rxjs": "^5.0.1",
     "style-loader": "^0.13.1",
     "systemjs": "0.19.40",
     "ts-loader": "^1.1.0",
