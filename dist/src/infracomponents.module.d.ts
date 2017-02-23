@@ -1,5 +1,6 @@
 import './rxjs-extensions';
-import { ModuleWithProviders } from '@angular/core';
+import { ModuleWithProviders, Provider } from '@angular/core';
 export declare class InfraComponentsModule {
-    static forRoot(providers: any): ModuleWithProviders;
+    static forRoot(labelsProvider: Provider): ModuleWithProviders;
+    static forChild(): ModuleWithProviders;
 }

@@ -37,21 +37,18 @@ export class ItemTree<T> implements OnInit {
     /**** Inputs ****/
 
     //Items
-    @Input()
-    private items: Array<T> = []
+    @Input() items: Array<any> = []
 
     // Property containing the list of child objects.
-    @Input("children")
-    private childrenProperty: string = "children"
+    @Input("children") childrenProperty: string = "children"
     // Property to display in the list
-    @Input("display")
-    private displayProperty: string = "label"
+    @Input("display") displayProperty: string = "label"
     // Filter pipe argument
-    @Input() private filter: (Object | string | Function) = ""
+    @Input() filter: (Object | string | Function) = ""
     // OrderBy pipe argument
-    @Input() private order: (Array<any> | string | Function) = []
+    @Input() order: (Array<any> | string | Function) = []
     // Reverse the order pipe
-    @Input() private reverse: boolean = false
+    @Input() reverse: any = false
     // Flatten the tree on the specified properties
     @Input()
     set flatten(flattenProps: Array<String>) {
@@ -62,29 +59,27 @@ export class ItemTree<T> implements OnInit {
         }
         this._flattenProps = flattenProps
     }
-    get flatten() {
+    get flatten() : Array<String> {
         return this._flattenProps
     }
-    private _flattenProps = []
+    private _flattenProps : Array<String> = []
 
     // Disable the opener icon
-    @Input()
-    private disableOpener = false
+    @Input() disableOpener : boolean = false
 
     /**** Outputs ****/
 
-    @Output() private onSelect: EventEmitter<T> = new EventEmitter<T>()
+    @Output() onSelect: EventEmitter<T> = new EventEmitter<T>()
 
     /**** View ****/
 
-    @ViewChild(ItemTree)
-    private childItemTree : ItemTree<T>
+    @ViewChild(ItemTree) childItemTree : ItemTree<T>
 
     /**** Internal Logic ****/
 
-    @Input("lastSelected") private _lastSelectedItem : T
+    @Input("lastSelected") _lastSelectedItem : T
     private _selectedItem : T
-    @Input("depth") private _depth : number = 0
+    @Input("depth") _depth : number = 0
     private unfolded: T[] = []
 
     ngOnInit(){
@@ -137,7 +132,7 @@ export class ItemTree<T> implements OnInit {
         return this.getChildren(item).length > 0
     }
 
-    private isFlattened() {
+    isFlattened() {
         return this._flattenProps.length
     }
 

@@ -13,7 +13,7 @@ export class FlattenObjectArrayPipe {
 
         let flattenedArray = Array.from(array)
 
-        let flatten = array => {
+        let flatten = (array: Array<Object>) => {
             array.forEach(item => {
                 for(let prop in item){
                     let val = item[prop]

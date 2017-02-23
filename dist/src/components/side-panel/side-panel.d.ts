@@ -1,10 +1,10 @@
-import { ElementRef } from '@angular/core';
+import { EventEmitter, ElementRef } from '@angular/core';
 export declare class SidePanel {
     private _eref;
-    private _opened;
+    opened: boolean;
     constructor(_eref: ElementRef);
-    private toggle;
-    private opener;
-    private onClose;
-    private onClick(event);
+    toggle: boolean;
+    opener: any;
+    onClose: EventEmitter<boolean>;
+    onClick(event: any): boolean;
 }

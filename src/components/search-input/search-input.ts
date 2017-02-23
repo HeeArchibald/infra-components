@@ -18,7 +18,7 @@ export class SearchInput implements OnInit, OnDestroy, DoCheck {
 
     /* Inputs / Outputs / View */
 
-    @Input() private set delay(d : number) {
+    @Input() set delay(d : number) {
         this._delay = d
         this.observable = this.searchTerms
             .debounceTime(this.delay)
@@ -29,14 +29,14 @@ export class SearchInput implements OnInit, OnDestroy, DoCheck {
             this.onChange.emit(val)
         })
     }
-    private get delay() {
+    get delay() {
         return this._delay
     }
     private _delay : number = 200
 
-    @Output() private onChange : EventEmitter<string> = new EventEmitter<string>()
+    @Output() onChange : EventEmitter<string> = new EventEmitter<string>()
 
-    @ViewChild("searchBox") private searchBox : ElementRef
+    @ViewChild("searchBox") searchBox : ElementRef
 
     /* Internal logic */
 

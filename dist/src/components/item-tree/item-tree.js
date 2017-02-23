@@ -134,7 +134,7 @@ __decorate([
 ], ItemTree.prototype, "order", void 0);
 __decorate([
     Input(),
-    __metadata("design:type", Boolean)
+    __metadata("design:type", Object)
 ], ItemTree.prototype, "reverse", void 0);
 __decorate([
     Input(),
@@ -143,7 +143,7 @@ __decorate([
 ], ItemTree.prototype, "flatten", null);
 __decorate([
     Input(),
-    __metadata("design:type", Object)
+    __metadata("design:type", Boolean)
 ], ItemTree.prototype, "disableOpener", void 0);
 __decorate([
     Output(),

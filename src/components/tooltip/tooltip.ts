@@ -21,9 +21,9 @@ export class Tooltip {
     constructor(private ref: ElementRef,
         private renderer : Renderer){}
 
-    @Input("tooltip") private tooltipContents: string
-    @Input() private position : "top" | "left" | "right" | "bottom" = "bottom"
-    @Input() private offset: number = 5
+    @Input("tooltip") tooltipContents: string
+    @Input() position : "top" | "left" | "right" | "bottom" = "bottom"
+    @Input() offset: number = 5
 
     private tooltipElt : HTMLElement
 

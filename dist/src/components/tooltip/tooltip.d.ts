@@ -3,9 +3,9 @@ export declare class Tooltip {
     private ref;
     private renderer;
     constructor(ref: ElementRef, renderer: Renderer);
-    private tooltipContents;
-    private position;
-    private offset;
+    tooltipContents: string;
+    position: "top" | "left" | "right" | "bottom";
+    offset: number;
     private tooltipElt;
     onMouseEnter(): void;
     onMouseLeave(): void;

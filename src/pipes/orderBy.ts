@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core'
 @Pipe({ name: 'orderBy' })
 export class OrderPipe implements PipeTransform {
 
-    transform(array, sortPredicate, reverseOrder, compareFn) {
+    transform(array, sortPredicate, reverseOrder?, compareFn?) {
         if (array == null || !sortPredicate) return array;
 
         /*** ***/

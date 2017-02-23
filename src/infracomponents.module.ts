@@ -1,6 +1,6 @@
 import './rxjs-extensions'
 
-import { NgModule, ModuleWithProviders } from '@angular/core'
+import { ModuleWithProviders, NgModule, Provider } from '@angular/core'
 import * as deps from './module.dependencies'
 import { DynamicModuleImports, LabelsService } from './services'
 
@@ -11,14 +11,21 @@ import { DynamicModuleImports, LabelsService } from './services'
     exports: deps.exportList
 })
 export class InfraComponentsModule {
-    static forRoot(providers): ModuleWithProviders {
-        let usedProviders = [ 
-            providers['DynamicModuleImports'] || DynamicModuleImports, 
-            providers['LabelsService'] ||  LabelsService
-        ]
+
+    static forRoot(labelsProvider: Provider): ModuleWithProviders {
         return {
             ngModule: InfraComponentsModule,
-            providers: usedProviders
+            providers: [
+                DynamicModuleImports,
+                labelsProvider || LabelsService
+            ]
         };
+    }
+
+     static forChild() : ModuleWithProviders {
+        return {
+            ngModule: InfraComponentsModule,
+            providers: []
+        }
     }
  }

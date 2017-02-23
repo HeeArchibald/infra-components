@@ -15,7 +15,7 @@ var SidePanel = (function () {
     }
     Object.defineProperty(SidePanel.prototype, "toggle", {
         set: function (toggle) {
-            this._opened = toggle;
+            this.opened = toggle;
         },
         enumerable: true,
         configurable: true
@@ -24,10 +24,10 @@ var SidePanel = (function () {
         var checkOpener = this.opener &&
             (this.opener.contains && this.opener.contains(event.target)) ||
             (this.opener.nativeElement && this.opener.nativeElement.contains(event.target));
-        if (this._opened &&
+        if (this.opened &&
             !this._eref.nativeElement.contains(event.target) &&
             !checkOpener) {
-            this._opened = false;
+            this.opened = false;
             this.onClose.emit();
         }
         return true;
@@ -50,7 +50,7 @@ __decorate([
 SidePanel = __decorate([
     Component({
         selector: 'side-panel',
-        template: "<div [ngClass]=\"{ opened: _opened }\"><ng-content></ng-content></div>",
+        template: "<div [ngClass]=\"{ opened: opened }\"><ng-content></ng-content></div>",
         styles: ["\n        div {\n            position: fixed;\n            z-index: 10;\n            overflow-x: hidden;\n            overflow-y: scroll;\n            height: 100%;\n            top: 0px;\n            left: -30%;\n            width: 30%;\n            transition: transform 0.25s;\n        }\n        div.opened {\n            transform: translateX(100%);\n        }\n    "],
         host: {
             '(document:click)': 'onClick($event)',

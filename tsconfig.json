@@ -21,6 +21,7 @@
         "build",
         "config",
         "bundle",
+        "dist",
         "node_modules",
         "bower_components"
     ],
@@ -28,5 +29,9 @@
     "buildOnSave": false,
     "atom": {
         "rewriteTsconfig": false
+    },
+    "angularCompilerOptions": {
+        "skipTemplateCodegen": true,
+        "debug": true
     }
 }

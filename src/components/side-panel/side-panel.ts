@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/cor
 
 @Component({
     selector: 'side-panel',
-    template: `<div [ngClass]="{ opened: _opened }"><ng-content></ng-content></div>`,
+    template: `<div [ngClass]="{ opened: opened }"><ng-content></ng-content></div>`,
     styles: [`
         div {
             position: fixed;
@@ -24,25 +24,25 @@ import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/cor
     }
 })
 export class SidePanel{
-    private _opened: boolean;
+    opened: boolean;
 
     constructor(private _eref: ElementRef){}
 
-    @Input() private set toggle(toggle: boolean){
-        this._opened = toggle
+    @Input() set toggle(toggle: boolean){
+        this.opened = toggle
     }
-    @Input() private opener
-    @Output() private onClose = new EventEmitter<boolean>();
+    @Input() opener
+    @Output() onClose = new EventEmitter<boolean>();
 
-    private onClick(event) {
+    onClick(event) {
         let checkOpener = this.opener &&
             (this.opener.contains && this.opener.contains(event.target)) ||
             (this.opener.nativeElement && this.opener.nativeElement.contains(event.target))
 
-        if (this._opened &&
+        if (this.opened &&
             !this._eref.nativeElement.contains(event.target) &&
             !checkOpener){
-            this._opened = false
+            this.opened = false
             this.onClose.emit()
         }
         return true

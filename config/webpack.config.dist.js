@@ -21,11 +21,11 @@ module.exports = {
             test: /\.ts$/,
             loaders: [
                 'file?name=[name].js',
-                'awesome-typescript-loader?tsconfig=tsconfig.json', 
+                'awesome-typescript-loader?tsconfig=tsconfig.json',
                 'angular2-template-loader'
             ]
-        }, { 
-            test: /\.(html|css)$/, 
+        }, {
+            test: /\.(html|css)$/,
             loader: 'raw-loader'
         }]
     },

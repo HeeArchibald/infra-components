@@ -1,21 +1,21 @@
-import { OnInit, ChangeDetectorRef } from '@angular/core';
+import { EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
 export declare class ItemTree<T> implements OnInit {
     private _changeRef;
     constructor(_changeRef: ChangeDetectorRef);
-    private items;
-    private childrenProperty;
-    private displayProperty;
-    private filter;
-    private order;
-    private reverse;
+    items: Array<any>;
+    childrenProperty: string;
+    displayProperty: string;
+    filter: (Object | string | Function);
+    order: (Array<any> | string | Function);
+    reverse: any;
     flatten: Array<String>;
     private _flattenProps;
-    private disableOpener;
-    private onSelect;
-    private childItemTree;
-    private _lastSelectedItem;
+    disableOpener: boolean;
+    onSelect: EventEmitter<T>;
+    childItemTree: ItemTree<T>;
+    _lastSelectedItem: T;
     private _selectedItem;
-    private _depth;
+    _depth: number;
     private unfolded;
     ngOnInit(): void;
     private selectItem(item);
@@ -26,6 +26,6 @@ export declare class ItemTree<T> implements OnInit {
     private display(item);
     private getChildren(item);
     private hasChildren(item);
-    private isFlattened();
+    isFlattened(): number;
     private flagIfParent();
 }
