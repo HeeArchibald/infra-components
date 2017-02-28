@@ -1,12 +1,3 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 import { Component, Input, Renderer, ElementRef } from '@angular/core';
 var Tooltip = (function () {
     function Tooltip(ref, renderer) {
@@ -92,30 +83,25 @@ var Tooltip = (function () {
     };
     return Tooltip;
 }());
-__decorate([
-    Input("tooltip"),
-    __metadata("design:type", String)
-], Tooltip.prototype, "tooltipContents", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], Tooltip.prototype, "position", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Number)
-], Tooltip.prototype, "offset", void 0);
-Tooltip = __decorate([
-    Component({
-        selector: '[tooltip]',
-        template: "<ng-content></ng-content>",
-        styles: ["\n        >>> body > div.tooltip {\n            position: absolute;\n            z-index: 100;\n        }\n        >>> body > div.tooltip.shown {\n        }\n    "],
-        host: {
-            '(mouseenter)': 'onMouseEnter()',
-            '(mouseleave)': 'onMouseLeave()'
-        }
-    }),
-    __metadata("design:paramtypes", [ElementRef,
-        Renderer])
-], Tooltip);
 export { Tooltip };
+Tooltip.decorators = [
+    { type: Component, args: [{
+                selector: '[tooltip]',
+                template: "<ng-content></ng-content>",
+                styles: ["\n        >>> body > div.tooltip {\n            position: absolute;\n            z-index: 100;\n        }\n        >>> body > div.tooltip.shown {\n        }\n    "],
+                host: {
+                    '(mouseenter)': 'onMouseEnter()',
+                    '(mouseleave)': 'onMouseLeave()'
+                }
+            },] },
+];
+Tooltip.ctorParameters = function () { return [
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
+Tooltip.propDecorators = {
+    'tooltipContents': [{ type: Input, args: ["tooltip",] },],
+    'position': [{ type: Input },],
+    'offset': [{ type: Input },],
+};
 //# sourceMappingURL=tooltip.js.map

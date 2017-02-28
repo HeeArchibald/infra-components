@@ -1,12 +1,3 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 import { Component, Input, Output, EventEmitter, Renderer, ElementRef } from '@angular/core';
 import { LabelsService } from '../../services';
 var MultiCombo = (function () {
@@ -128,74 +119,36 @@ var MultiCombo = (function () {
     };
     return MultiCombo;
 }());
-__decorate([
-    Input(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], MultiCombo.prototype, "comboModel", null);
-__decorate([
-    Input("outputModel"),
-    __metadata("design:type", Object)
-], MultiCombo.prototype, "filteredModel", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], MultiCombo.prototype, "title", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], MultiCombo.prototype, "display", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], MultiCombo.prototype, "filter", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], MultiCombo.prototype, "orderBy", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Boolean)
-], MultiCombo.prototype, "reverse", void 0);
-__decorate([
-    Input("max"),
-    __metadata("design:type", Number)
-], MultiCombo.prototype, "maxSelected", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Boolean)
-], MultiCombo.prototype, "disabled", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", Object)
-], MultiCombo.prototype, "onSelectItem", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", Object)
-], MultiCombo.prototype, "onDeselectItem", void 0);
-__decorate([
-    Output("outputModelChange"),
-    __metadata("design:type", Object)
-], MultiCombo.prototype, "filteredModelChange", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", Object)
-], MultiCombo.prototype, "onOpen", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", Object)
-], MultiCombo.prototype, "onClose", void 0);
-MultiCombo = __decorate([
-    Component({
-        selector: 'multi-combo',
-        template: "\n        <button (click)=\"toggleVisibility()\"\n            [ngClass]=\"{ opened: show }\"\n            [disabled]=\"disabled\">\n            {{ title }}\n        </button>\n        <div [ngClass]=\"{ hidden: !show }\">\n            <div class=\"options\">\n                <button class=\"select-all\" (click)=\"selectAll()\" *ngIf=\"!maxSelected\"\n                    [title]=\"labels('select.all')\">{{ labels('select.all') }}</button>\n                <button class=\"deselect-all\" (click)=\"deselectAll()\"\n                    [title]=\"labels('deselect.all')\">{{ labels('deselect.all') }}</button>\n            </div>\n            <div *ngIf=\"filter\" class=\"filter\">\n                <search-input (onChange)=\"search.input = $event\" [attr.placeholder]=\"labels('search')\"></search-input>\n            </div>\n            <ul>\n                <li *ngFor=\"let item of _comboModel | filter: getFilter() | orderBy: orderBy | store: self:'filteredComboModel'\"\n                    (click)=\"toggleItem(item)\"\n                    [ngClass]=\"{ selected: isSelected(item) }\"\n                    [attr.disabled]=\"isDisabled()\">\n                    {{ displayItem(item) }}\n                </li>\n            </ul>\n        </div>\n    ",
-        styles: ["\n        :host {\n            position: relative;\n        }\n\n        :host > button {\n            min-width: 150px;\n        }\n\n        :host > div {\n            position: absolute;\n            z-index: 2;\n            left: 0px;\n            overflow: hidden;\n            background:white;\n            border: 2px solid black;\n        }\n\n        :host > div.hidden {\n            max-height: 0px;\n            border-width: 0px;\n        }\n\n        :host > div>div.options {\n        }\n\n        :host > div>div.options>* {\n            display: inline-block;\n            vertical-align: middle;\n        }\n\n        :host > div>div.options>button {\n        }\n        :host > div>div.options>button:hover {\n        }\n\n        :host > div>div.filter {\n            margin: 10px 0px;\n            width: 100%;\n            position: relative;\n        }\n\n        :host > div>div.filter input {\n            width: 100%;\n        }\n\n        :host > div>div.filter input:focus {\n        }\n\n        :host > div>ul {\n            list-style: none;\n            padding: 0px;\n            overflow-y: scroll;\n            max-height: 200px;\n        }\n\n        :host > div>ul>li {\n            white-space: nowrap;\n            cursor: pointer;\n        }\n\n        :host > div>ul>li.selected {\n        }\n\n        :host > div>ul>li:not(.selected):not([disabled]):hover {\n        }\n\n        :host > div>ul>li:not(.selected)[disabled=\"true\"] {\n            pointer-events: none;\n        }\n    "],
-        host: {
-            '(document:click)': 'onClick($event)',
-        }
-    }),
-    __metadata("design:paramtypes", [ElementRef, Renderer,
-        LabelsService])
-], MultiCombo);
 export { MultiCombo };
+MultiCombo.decorators = [
+    { type: Component, args: [{
+                selector: 'multi-combo',
+                template: "\n        <button (click)=\"toggleVisibility()\"\n            [ngClass]=\"{ opened: show }\"\n            [disabled]=\"disabled\">\n            {{ title }}\n        </button>\n        <div [ngClass]=\"{ hidden: !show }\">\n            <div class=\"options\">\n                <button class=\"select-all\" (click)=\"selectAll()\" *ngIf=\"!maxSelected\"\n                    [title]=\"labels('select.all')\">{{ labels('select.all') }}</button>\n                <button class=\"deselect-all\" (click)=\"deselectAll()\"\n                    [title]=\"labels('deselect.all')\">{{ labels('deselect.all') }}</button>\n            </div>\n            <div *ngIf=\"filter\" class=\"filter\">\n                <search-input (onChange)=\"search.input = $event\" [attr.placeholder]=\"labels('search')\"></search-input>\n            </div>\n            <ul>\n                <li *ngFor=\"let item of _comboModel | filter: getFilter() | orderBy: orderBy | store: self:'filteredComboModel'\"\n                    (click)=\"toggleItem(item)\"\n                    [ngClass]=\"{ selected: isSelected(item) }\"\n                    [attr.disabled]=\"isDisabled()\">\n                    {{ displayItem(item) }}\n                </li>\n            </ul>\n        </div>\n    ",
+                styles: ["\n        :host {\n            position: relative;\n        }\n\n        :host > button {\n            min-width: 150px;\n        }\n\n        :host > div {\n            position: absolute;\n            z-index: 2;\n            left: 0px;\n            overflow: hidden;\n            background:white;\n            border: 2px solid black;\n        }\n\n        :host > div.hidden {\n            max-height: 0px;\n            border-width: 0px;\n        }\n\n        :host > div>div.options {\n        }\n\n        :host > div>div.options>* {\n            display: inline-block;\n            vertical-align: middle;\n        }\n\n        :host > div>div.options>button {\n        }\n        :host > div>div.options>button:hover {\n        }\n\n        :host > div>div.filter {\n            margin: 10px 0px;\n            width: 100%;\n            position: relative;\n        }\n\n        :host > div>div.filter input {\n            width: 100%;\n        }\n\n        :host > div>div.filter input:focus {\n        }\n\n        :host > div>ul {\n            list-style: none;\n            padding: 0px;\n            overflow-y: scroll;\n            max-height: 200px;\n        }\n\n        :host > div>ul>li {\n            white-space: nowrap;\n            cursor: pointer;\n        }\n\n        :host > div>ul>li.selected {\n        }\n\n        :host > div>ul>li:not(.selected):not([disabled]):hover {\n        }\n\n        :host > div>ul>li:not(.selected)[disabled=\"true\"] {\n            pointer-events: none;\n        }\n    "],
+                host: {
+                    '(document:click)': 'onClick($event)',
+                }
+            },] },
+];
+MultiCombo.ctorParameters = function () { return [
+    { type: ElementRef, },
+    { type: Renderer, },
+    { type: LabelsService, },
+]; };
+MultiCombo.propDecorators = {
+    'comboModel': [{ type: Input },],
+    'filteredModel': [{ type: Input, args: ["outputModel",] },],
+    'title': [{ type: Input },],
+    'display': [{ type: Input },],
+    'filter': [{ type: Input },],
+    'orderBy': [{ type: Input },],
+    'reverse': [{ type: Input },],
+    'maxSelected': [{ type: Input, args: ["max",] },],
+    'disabled': [{ type: Input },],
+    'onSelectItem': [{ type: Output },],
+    'onDeselectItem': [{ type: Output },],
+    'filteredModelChange': [{ type: Output, args: ["outputModelChange",] },],
+    'onOpen': [{ type: Output },],
+    'onClose': [{ type: Output },],
+};
 //# sourceMappingURL=multi-combo.js.map

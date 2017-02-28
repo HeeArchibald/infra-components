@@ -1,11 +1,5 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 import { Injectable } from '@angular/core';
-var LabelsService = LabelsService_1 = (function () {
+var LabelsService = (function () {
     function LabelsService() {
         this.labels = {
             "select.all": "Select all",
@@ -22,7 +16,7 @@ var LabelsService = LabelsService_1 = (function () {
         }
     };
     LabelsService.withLabels = function (labels) {
-        var newService = new LabelsService_1();
+        var newService = new LabelsService();
         for (var prop in labels) {
             newService.labels[prop] = labels[prop];
         }
@@ -30,9 +24,9 @@ var LabelsService = LabelsService_1 = (function () {
     };
     return LabelsService;
 }());
-LabelsService = LabelsService_1 = __decorate([
-    Injectable()
-], LabelsService);
 export { LabelsService };
-var LabelsService_1;
+LabelsService.decorators = [
+    { type: Injectable },
+];
+LabelsService.ctorParameters = function () { return []; };
 //# sourceMappingURL=labelsService.js.map

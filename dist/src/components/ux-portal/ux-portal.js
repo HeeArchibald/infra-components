@@ -1,21 +1,16 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 import { Component } from '@angular/core';
 var UxPortal = (function () {
     function UxPortal() {
     }
     return UxPortal;
 }());
-UxPortal = __decorate([
-    Component({
-        selector: 'ux-portal',
-        template: "\n        <header>\n            <ng-content select=\"[header-left]\"></ng-content>\n            <ng-content select=\"[header-middle]\"></ng-content>\n            <ng-content select=\"[header-right]\"></ng-content>\n        </header>\n        <section>\n            <ng-content select=\"[section]\"></ng-content>\n        </section>\n        <footer>\n            <ng-content select=\"[footer]\"></ng-content>\n        </footer>\n    ",
-        styles: ["\n        header{\n            position:relative;\n            display: flex;\n            align-items: center;\n            top: 0px;\n            width: 100%;\n        }\n\n        header >>> > div {\n            flex-grow: 1;\n            flex-basis: 33.3%;\n        }\n        header >>> > div {\n            display: flex;\n            align-items: center;\n        }\n        header >>> > div[header-middle] {\n            justify-content: center;\n        }\n        header >>> > div[header-right] {\n            flex-direction: row-reverse;\n        }\n        header >>> > div > *{\n            display: inline-block;\n            vertical-align: middle;\n        }\n    "]
-    })
-], UxPortal);
 export { UxPortal };
+UxPortal.decorators = [
+    { type: Component, args: [{
+                selector: 'ux-portal',
+                template: "\n        <header>\n            <ng-content select=\"[header-left]\"></ng-content>\n            <ng-content select=\"[header-middle]\"></ng-content>\n            <ng-content select=\"[header-right]\"></ng-content>\n        </header>\n        <section>\n            <ng-content select=\"[section]\"></ng-content>\n        </section>\n        <footer>\n            <ng-content select=\"[footer]\"></ng-content>\n        </footer>\n    ",
+                styles: ["\n        header{\n            position:relative;\n            display: flex;\n            align-items: center;\n            top: 0px;\n            width: 100%;\n        }\n\n        header >>> > div {\n            flex-grow: 1;\n            flex-basis: 33.3%;\n        }\n        header >>> > div {\n            display: flex;\n            align-items: center;\n        }\n        header >>> > div[header-middle] {\n            justify-content: center;\n        }\n        header >>> > div[header-right] {\n            flex-direction: row-reverse;\n        }\n        header >>> > div > *{\n            display: inline-block;\n            vertical-align: middle;\n        }\n    "]
+            },] },
+];
+UxPortal.ctorParameters = function () { return []; };
 //# sourceMappingURL=ux-portal.js.map
