@@ -5,9 +5,9 @@
 </button>
 <div [ngClass]="{ hidden: !show }">
     <div class="options">
-        <button class="select-all" (click)="selectAll()" *ngIf="!maxSelected" 
+        <button class="select-all" (click)="selectAll()" *ngIf="!maxSelected"
             [title]="labels('select.all')">{{ labels('select.all') }}</button>
-        <button class="deselect-all" (click)="deselectAll()" 
+        <button class="deselect-all" (click)="deselectAll()"
             [title]="labels('deselect.all')">{{ labels('deselect.all') }}</button>
     </div>
     <div *ngIf="filter" class="filter">

@@ -6,7 +6,7 @@ export declare class MultiCombo {
     private labelsService;
     constructor(_eref: ElementRef, _renderer: Renderer, labelsService: LabelsService);
     private self;
-    private labels(label);
+    labels(label: any): any;
     private comboModel;
     private _comboModel;
     private filteredModel;

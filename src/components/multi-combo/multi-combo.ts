@@ -110,15 +110,18 @@ import { LabelsService } from '../../services'
 })
 export class MultiCombo {
 
-    constructor(private _eref: ElementRef, private _renderer: Renderer,
+    constructor(
+        private _eref: ElementRef,
+        private _renderer: Renderer,
         private labelsService: LabelsService){}
 
     private self = this
-    private labels(label){
+    labels(label){
         return this.labelsService.getLabel(label)
     }
 
     /**** Inputs ****/
+
     @Input()
     private set comboModel(model){
         this._comboModel = model
