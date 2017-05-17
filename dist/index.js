@@ -1,6 +1,7 @@
-export * from './src/infracomponents.module';
-export * from './src/components';
-export * from './src/directives';
-export * from './src/pipes';
-export * from './src/services';
+export * from './infracomponents.module';
+export * from './components';
+export * from './directives';
+export * from './pipes';
+export * from './services';
+export * from './helpers';
 //# sourceMappingURL=index.js.map

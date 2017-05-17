@@ -63,6 +63,7 @@ export class SearchInput implements OnInit, OnDestroy, DoCheck {
                 this.onChange.emit(val)
             })
         }
+        setTimeout(() => this.evalAttributes(), 20);
     }
 
     ngDoCheck() : void {

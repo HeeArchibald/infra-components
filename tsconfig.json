@@ -14,7 +14,11 @@
         "noLib": false,
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors": true,
-        "outDir": "./dist"
+        "outDir": "./dist",
+        "typeRoots": [
+            "./node-modules/@types"
+        ],
+        "types": ["core-js"]
     },
     "exclude": [
         "assets",
@@ -24,6 +28,9 @@
         "dist",
         "node_modules",
         "bower_components"
+    ],
+    "files": [
+        "./src/index.ts"
     ],
     "compileOnSave": false,
     "buildOnSave": false,

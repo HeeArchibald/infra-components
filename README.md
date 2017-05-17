@@ -11,12 +11,12 @@ Done !
 
 # Use it
 
-`npm install web-education/infra-components --save-dev`
+`npm install infra-components --save-dev`
 
 >In your code
 
 ```typescript
-import { InfraComponentsModule } from 'infra-components/dist'
+import { InfraComponentsModule } from 'infra-components'
 
 @NgModule({
     imports: [
