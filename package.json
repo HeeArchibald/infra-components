@@ -1,6 +1,6 @@
 {
   "name": "infra-components",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Angular2 agnostic components library",
   "main": "index.js",
   "types": "index.d.ts",
