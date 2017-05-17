@@ -11,7 +11,7 @@ Done !
 
 # Use it
 
-`npm install infra-components --save-dev`
+`npm install web-education/infra-components --save-dev`
 
 >In your code
 
