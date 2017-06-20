@@ -6,4 +6,5 @@ export { SearchInput } from './search-input/search-input';
 export { MultiCombo } from './multi-combo/multi-combo';
 export { LightBox } from './light-box/light-box';
 export { Tooltip } from './tooltip/tooltip';
+export { Wizard, Step } from './wizard/wizard';
 //# sourceMappingURL=index.js.map

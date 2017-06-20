@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UxPortal, SidePanel, PushPanel, ItemTree, SearchInput, MultiCombo, LightBox, Tooltip } from './components/index';
+import { UxPortal, SidePanel, PushPanel, ItemTree, SearchInput, MultiCombo, LightBox, Tooltip, Wizard, Step } from './components/index';
 import { DynamicTemplate } from './directives/index';
 import { FilterPipe, OrderPipe, LimitPipe, FlattenObjectArrayPipe, StorePipe } from './pipes/index';
 export var imports = [
@@ -21,7 +21,9 @@ export var declarations = [
     LimitPipe,
     FlattenObjectArrayPipe,
     DynamicTemplate,
-    Tooltip
+    Tooltip,
+    Wizard,
+    Step
 ];
 export var exportList = declarations;
 //# sourceMappingURL=module.dependencies.js.map

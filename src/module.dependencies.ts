@@ -2,7 +2,7 @@ import { CommonModule }    from '@angular/common'
 import { FormsModule }     from '@angular/forms'
 
 import { UxPortal, SidePanel, PushPanel, ItemTree,
-    SearchInput, MultiCombo, LightBox, Tooltip} from './components/index'
+    SearchInput, MultiCombo, LightBox, Tooltip, Wizard, Step} from './components/index'
 import { DynamicTemplate }  from './directives/index'
 import { FilterPipe, OrderPipe, LimitPipe,
     FlattenObjectArrayPipe, StorePipe } from './pipes/index'
@@ -26,7 +26,9 @@ export let declarations = [
     LimitPipe,
     FlattenObjectArrayPipe,
     DynamicTemplate,
-    Tooltip
+    Tooltip,
+    Wizard,
+    Step
 ]
 
 export let exportList = declarations
