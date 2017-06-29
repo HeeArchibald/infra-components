@@ -1,7 +1,7 @@
 import { 
-    Component, Input, Renderer, 
+    Component, Input, Output, Renderer, 
     ContentChildren, AfterContentInit, QueryList, 
-    ElementRef,
+    ElementRef, EventEmitter,
     OnDestroy } from '@angular/core'
 import { LabelsService } from '../../services'
 
@@ -25,10 +25,6 @@ export class Step {
     @Input() isActived:boolean; 
     hasError:boolean = false;
     isFinished:boolean = false;
-
-    public test() : string {
-        return "TEST !! " + name; 
-    } 
 }
 
 @Component({
@@ -46,22 +42,26 @@ export class Step {
         <section class="steps-content">
             <ng-content select="step"></ng-content>
             <nav class="steps-nav-button">
-                <button class="cancel" (click)="cancel()" [title]="labels('cancel')">
+                <button class="cancel" 
+                    (click)="cancel.emit()"
+                    [title]="labels('cancel')">
                     {{ labels('cancel') }}
                 </button>
-                <button class="previous" (click)="previousStep();" 
+                <button class="previous" 
+                (click)="onPreviousStep()" 
                     *ngIf="activeStep > 0" 
                     [title]="labels('previous')">
                     {{ labels('previous') }}
                 </button>
-                <button class="next" (click)="nextStep();" 
+                <button class="next" 
+                (click)="onNextStep()" 
                     *ngIf="activeStep < steps.length - 1" ng-disabled="!canDoNext()"
                     [title]="labels('next')">
                     {{ labels('next') }}
                 </button>
                 <button class="finish" 
                     *ngIf="activeStep === steps.length - 1" 
-                    (click)="finish()" ng-disabled="!canDoFinish()"
+                    (click)="finish.emit()" ng-disabled="!canDoFinish()"
                     [title]="labels('finish')">
                     {{ labels('finish') }}
                 </button>
@@ -108,6 +108,29 @@ export class Wizard  implements AfterContentInit, OnDestroy {
             private ref : ElementRef)
     {}
     
+    @Output("cancel") cancel: EventEmitter<{}> = new EventEmitter();
+    @Output("finish") finish: EventEmitter<{}> = new EventEmitter();
+    @Output("previousStep") previousStep : EventEmitter<Number> = new EventEmitter();
+    @Output("nextStep") nextStep : EventEmitter<Number> = new EventEmitter();
+
+    onPreviousStep() {
+        if (this.activeStep > 0) {
+            this.steps.toArray()[this.activeStep].isActived = false;
+            this.steps.toArray()[this.activeStep -1].isActived = true;
+            this.activeStep--;
+        }
+        this.previousStep.emit(this.activeStep);
+    }
+
+    onNextStep() {
+        if (this.activeStep < this.steps.length -1) {
+            this.steps.toArray()[this.activeStep].isActived = false;
+            this.steps.toArray()[this.activeStep + 1].isActived = true;
+            this.activeStep++;
+        }
+        this.nextStep.emit(this.activeStep);
+    }
+
     @ContentChildren(Step) steps: QueryList<Step>;
     private activeStep:number = 0;
 
@@ -123,29 +146,9 @@ export class Wizard  implements AfterContentInit, OnDestroy {
         return this.labelsService.getLabel(label)
     }
 
-    private cancel() {}
-
-    private previousStep() {
-        if (this.activeStep > 0) {
-            this.steps.toArray()[this.activeStep].isActived = false;
-            this.steps.toArray()[this.activeStep -1].isActived = true;
-            this.activeStep--;
-        } 
-    }
-
-    private nextStep() {
-        if (this.activeStep < this.steps.length -1) {
-            this.steps.toArray()[this.activeStep].isActived = false;
-            this.steps.toArray()[this.activeStep + 1].isActived = true;
-            this.activeStep++;
-        }
-    }
-
     private canDoNext():boolean {
         return true;
     }
-
-    private finish() {}
 
     private canDoFinish():boolean {
         return true;

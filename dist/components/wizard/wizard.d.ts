@@ -1,26 +1,27 @@
-import { Renderer, AfterContentInit, QueryList, ElementRef, OnDestroy } from '@angular/core';
+import { Renderer, AfterContentInit, QueryList, ElementRef, EventEmitter, OnDestroy } from '@angular/core';
 import { LabelsService } from '../../services';
 export declare class Step {
     name: string;
     isActived: boolean;
     hasError: boolean;
     isFinished: boolean;
-    test(): string;
 }
 export declare class Wizard implements AfterContentInit, OnDestroy {
     private labelsService;
     private renderer;
     private ref;
     constructor(labelsService: LabelsService, renderer: Renderer, ref: ElementRef);
+    cancel: EventEmitter<{}>;
+    finish: EventEmitter<{}>;
+    previousStep: EventEmitter<Number>;
+    nextStep: EventEmitter<Number>;
+    onPreviousStep(): void;
+    onNextStep(): void;
     steps: QueryList<Step>;
     private activeStep;
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
     private labels(label);
-    private cancel();
-    private previousStep();
-    private nextStep();
     private canDoNext();
-    private finish();
     private canDoFinish();
 }
