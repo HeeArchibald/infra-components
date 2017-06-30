@@ -15,8 +15,12 @@ export declare class Wizard implements AfterContentInit, OnDestroy {
     finish: EventEmitter<{}>;
     previousStep: EventEmitter<Number>;
     nextStep: EventEmitter<Number>;
+    doCancel(): void;
+    doFinish(): void;
     onPreviousStep(): void;
+    doPreviousStep(): void;
     onNextStep(): void;
+    doNextStep(): void;
     steps: QueryList<Step>;
     private activeStep;
     ngAfterContentInit(): void;

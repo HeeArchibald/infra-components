@@ -48,13 +48,13 @@ export class Step {
                     {{ labels('cancel') }}
                 </button>
                 <button class="previous" 
-                (click)="onPreviousStep()" 
+                    (click)="onPreviousStep()" 
                     *ngIf="activeStep > 0" 
                     [title]="labels('previous')">
                     {{ labels('previous') }}
                 </button>
                 <button class="next" 
-                (click)="onNextStep()" 
+                    (click)="onNextStep()" 
                     *ngIf="activeStep < steps.length - 1" ng-disabled="!canDoNext()"
                     [title]="labels('next')">
                     {{ labels('next') }}
@@ -113,22 +113,37 @@ export class Wizard  implements AfterContentInit, OnDestroy {
     @Output("previousStep") previousStep : EventEmitter<Number> = new EventEmitter();
     @Output("nextStep") nextStep : EventEmitter<Number> = new EventEmitter();
 
+    doCancel() {
+        this.activeStep = 0;
+        this.steps.forEach((step, index) => {
+            index == 0 ? step.isActived = true : step.isActived = false; 
+        })
+    }
+
+    doFinish() {
+    }
+
     onPreviousStep() {
+        this.previousStep.emit(this.activeStep);
+    }
+
+    doPreviousStep() {
         if (this.activeStep > 0) {
             this.steps.toArray()[this.activeStep].isActived = false;
             this.steps.toArray()[this.activeStep -1].isActived = true;
             this.activeStep--;
         }
-        this.previousStep.emit(this.activeStep);
     }
 
     onNextStep() {
+        this.nextStep.emit(this.activeStep);
+    }
+    doNextStep() {
         if (this.activeStep < this.steps.length -1) {
             this.steps.toArray()[this.activeStep].isActived = false;
             this.steps.toArray()[this.activeStep + 1].isActived = true;
             this.activeStep++;
         }
-        this.nextStep.emit(this.activeStep);
     }
 
     @ContentChildren(Step) steps: QueryList<Step>;
