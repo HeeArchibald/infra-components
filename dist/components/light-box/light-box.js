@@ -9,7 +9,9 @@ var LightBox = (function () {
         this.onClose = new EventEmitter();
     }
     Object.defineProperty(LightBox.prototype, "show", {
-        get: function () { return this._show; },
+        get: function () {
+            return this._show;
+        },
         set: function (s) {
             var _this = this;
             if (this.timer)

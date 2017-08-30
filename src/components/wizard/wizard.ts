@@ -147,7 +147,7 @@ export class Wizard  implements AfterContentInit, OnDestroy {
     }
 
     @ContentChildren(Step) steps: QueryList<Step>;
-    private activeStep:number = 0;
+    activeStep:number = 0;
 
     ngAfterContentInit() {
         if (this.steps.length == 0) 
@@ -157,15 +157,15 @@ export class Wizard  implements AfterContentInit, OnDestroy {
     ngOnDestroy() : void {
     }
 
-    private labels(label){
+    labels(label){
         return this.labelsService.getLabel(label)
     }
 
-    private canDoNext():boolean {
+    canDoNext():boolean {
         return true;
     }
 
-    private canDoFinish():boolean {
+    canDoFinish():boolean {
         return true;
     }
 

@@ -48,7 +48,8 @@ export class PushPanel{
     @Input() private set toggle(toggle: boolean){
         this._opened = toggle
     }
-    private _opened: boolean;
+    _opened: boolean;
+    
     @Input() private opener
 
     @Output() private onClose = new EventEmitter<boolean>();

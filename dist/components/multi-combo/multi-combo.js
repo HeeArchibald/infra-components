@@ -5,8 +5,6 @@ var MultiCombo = (function () {
         this._eref = _eref;
         this._renderer = _renderer;
         this.labelsService = labelsService;
-        this.self = this;
-        this._comboModel = [];
         this.filteredModel = [];
         this.title = "Select";
         this.reverse = false;
@@ -16,6 +14,8 @@ var MultiCombo = (function () {
         this.filteredModelChange = new EventEmitter();
         this.onOpen = new EventEmitter();
         this.onClose = new EventEmitter();
+        this.self = this;
+        this._comboModel = [];
         this.filteredComboModel = [];
         this.search = {
             input: '',
@@ -136,7 +136,6 @@ MultiCombo.ctorParameters = function () { return [
     { type: LabelsService, },
 ]; };
 MultiCombo.propDecorators = {
-    'comboModel': [{ type: Input },],
     'filteredModel': [{ type: Input, args: ["outputModel",] },],
     'title': [{ type: Input },],
     'display': [{ type: Input },],
@@ -150,5 +149,6 @@ MultiCombo.propDecorators = {
     'filteredModelChange': [{ type: Output, args: ["outputModelChange",] },],
     'onOpen': [{ type: Output },],
     'onClose': [{ type: Output },],
+    'comboModel': [{ type: Input },],
 };
 //# sourceMappingURL=multi-combo.js.map

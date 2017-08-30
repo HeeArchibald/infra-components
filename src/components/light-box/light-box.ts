@@ -87,8 +87,10 @@ export class LightBox {
             }, wait*1000)
         }
     }
-    get show() { return this._show }
-    private _show: boolean = false
+    get show(): boolean { 
+        return this._show 
+    }
+    _show: boolean = false
 
     /* Outputs */
 

@@ -3,7 +3,7 @@ export declare class PushPanel {
     private _eref;
     constructor(_eref: ElementRef);
     private toggle;
-    private _opened;
+    _opened: boolean;
     private opener;
     private onClose;
     private inside;

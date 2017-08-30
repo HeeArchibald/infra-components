@@ -22,10 +22,10 @@ export declare class Wizard implements AfterContentInit, OnDestroy {
     onNextStep(): void;
     doNextStep(): void;
     steps: QueryList<Step>;
-    private activeStep;
+    activeStep: number;
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
-    private labels(label);
-    private canDoNext();
-    private canDoFinish();
+    labels(label: any): any;
+    canDoNext(): boolean;
+    canDoFinish(): boolean;
 }

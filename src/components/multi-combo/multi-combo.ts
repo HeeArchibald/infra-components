@@ -5,7 +5,6 @@ import { LabelsService } from '../../services'
 
 @Component({
     selector:'multi-combo',
-    //templateUrl: './multi-combo.html',
     template: `
         <button (click)="toggleVisibility()"
             [ngClass]="{ opened: show }"
@@ -32,7 +31,6 @@ import { LabelsService } from '../../services'
             </ul>
         </div>
     `,
-    //styleUrls: ['./multi-combo.css'],
     styles: [`
         :host {
             position: relative;
@@ -109,21 +107,37 @@ import { LabelsService } from '../../services'
     }
 })
 export class MultiCombo {
+    @Input("outputModel") filteredModel = []
+    @Input() title: string = "Select"
+    @Input() display: string | Function
+    @Input() filter: string
+    @Input() orderBy: (string | Array<(string | Function)> | Function)
+    @Input() reverse: boolean = false
+    @Input("max") maxSelected: number
+    @Input() disabled: boolean = false
+
+    @Output() onSelectItem = new EventEmitter<any>()
+    @Output() onDeselectItem = new EventEmitter<any>()
+    @Output("outputModelChange") filteredModelChange = new EventEmitter<any>()
+    @Output() onOpen = new EventEmitter<any>()
+    @Output() onClose = new EventEmitter<any>()
+    
+    self = this
+    _comboModel = []
+
+    filteredComboModel = []
 
     constructor(
         private _eref: ElementRef,
         private _renderer: Renderer,
         private labelsService: LabelsService){}
-
-    private self = this
+    
     labels(label){
         return this.labelsService.getLabel(label)
     }
 
-    /**** Inputs ****/
-
     @Input()
-    private set comboModel(model){
+    set comboModel(model){
         this._comboModel = model
 
         if (!model) {
@@ -139,39 +153,17 @@ export class MultiCombo {
             }
         }
     }
-    private _comboModel = []
 
-    @Input("outputModel") private filteredModel = []
-
-    @Input() private title: string = "Select"
-    @Input() private display: string | Function
-    @Input() private filter: string
-    @Input() private orderBy: (string | Array<(string | Function)> | Function)
-    @Input() private reverse: boolean = false
-    @Input("max") private maxSelected: number
-    @Input() private disabled: boolean = false
-
-     /**** Outputs ****/
-
-    @Output() private onSelectItem = new EventEmitter<any>()
-    @Output() private onDeselectItem = new EventEmitter<any>()
-    @Output("outputModelChange") private filteredModelChange = new EventEmitter<any>()
-    @Output() private onOpen = new EventEmitter<any>()
-    @Output() private onClose = new EventEmitter<any>()
-
-    /**** Internal logic ****/
-
-    private filteredComboModel = []
-
-    private search = {
+    search = {
         input: '',
         reset: function() {
             this.input = ""
         }
     }
 
-    private show = false
-    private toggleVisibility() {
+    show = false
+    
+    toggleVisibility() {
         this.show = !this.show
         if(this.show) {
             this.search.reset()
@@ -181,16 +173,16 @@ export class MultiCombo {
         }
     }
 
-    private isSelected(item) {
+    isSelected(item) {
         return this.filteredModel && this.filteredModel.indexOf(item) >= 0
     }
 
-    private isDisabled() {
+    isDisabled() {
         return this.filteredModel && this.maxSelected &&
             this.maxSelected <= this.filteredModel.length
     }
 
-    private toggleItem(item) {
+    toggleItem(item) {
         let idx = this.filteredModel.indexOf(item)
         if (idx >= 0) {
             this.filteredModel.splice(idx, 1);
@@ -203,7 +195,7 @@ export class MultiCombo {
         this.filteredModelChange.emit(this.filteredModel)
     }
 
-    private selectAll() {
+    selectAll() {
         this.filteredModel = []
         for (let i = 0; i < this.filteredComboModel.length; i++) {
             this.filteredModel.push(this.filteredComboModel[i])
@@ -211,12 +203,12 @@ export class MultiCombo {
         this.filteredModelChange.emit(this.filteredModel)
     }
 
-    private deselectAll() {
+    deselectAll() {
         this.filteredModel = []
         this.filteredModelChange.emit(this.filteredModel)
     }
 
-    private displayItem(item) {
+    displayItem(item) {
         return  item instanceof Object ?
                     this.display && typeof this.display === "string" ?
                         item[this.display] :
@@ -226,14 +218,14 @@ export class MultiCombo {
                         item
     }
 
-    private onClick(event) {
+    onClick(event) {
         if (this.show && !this._eref.nativeElement.contains(event.target)) {
             this.toggleVisibility()
         }
         return true
     }
 
-    private getFilter() {
+    getFilter() {
         if(!this.filter)
             return ""
         let filter : string | {} = ""

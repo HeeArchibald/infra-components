@@ -6,7 +6,7 @@ export declare class LightBox {
     private host;
     constructor(cdRef: ChangeDetectorRef, renderer: Renderer, host: ElementRef);
     show: boolean;
-    private _show;
+    _show: boolean;
     onClose: EventEmitter<any>;
     section: ElementRef;
     overlay: ElementRef;
