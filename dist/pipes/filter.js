@@ -15,7 +15,7 @@ var FilterPipe = (function () {
         }
         return false;
     };
-    FilterPipe.prototype._filterObject = function (value, filter, arrayRef) {
+    FilterPipe.prototype._filterObject = function (value, filter, objectRef, arrayRef) {
         if (typeof value == "object" && typeof filter === "object") {
             var check = true;
             for (var property in filter) {
@@ -36,9 +36,12 @@ var FilterPipe = (function () {
                 else if (filterValue instanceof Function) {
                     check = filterValue(checkedValue);
                 }
+                else if (filterValue instanceof Object) {
+                    return this._filterObject(checkedValue, filterValue, objectRef, arrayRef);
+                }
             }
             if (check) {
-                arrayRef.push(value);
+                arrayRef.push(objectRef);
             }
             return true;
         }
@@ -61,7 +64,7 @@ var FilterPipe = (function () {
         var filteredArray = [];
         array.forEach(function (item) {
             _this._filterString(item, by, filteredArray) ||
-                _this._filterObject(item, by, filteredArray) ||
+                _this._filterObject(item, by, item, filteredArray) ||
                 _this._filterFunction(item, by, filteredArray);
         });
         return filteredArray;

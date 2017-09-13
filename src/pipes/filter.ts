@@ -18,7 +18,7 @@ export class FilterPipe implements PipeTransform {
         return false
     }
 
-    private _filterObject(value, filter, arrayRef: Array<Object>) {
+    private _filterObject(value, filter, objectRef, arrayRef: Array<Object>) {
          if (typeof value == "object" && typeof filter === "object") {
             let check = true
             for(let property in filter) {
@@ -37,10 +37,12 @@ export class FilterPipe implements PipeTransform {
                     }
                 } else if(filterValue instanceof Function) {
                     check = filterValue(checkedValue)
-                }
+                } else if (filterValue instanceof Object) {
+                    return this._filterObject(checkedValue, filterValue, objectRef, arrayRef);
+                } 
             }
             if(check){
-                arrayRef.push(value)
+                arrayRef.push(objectRef)
             }
             return true
         }
@@ -66,7 +68,7 @@ export class FilterPipe implements PipeTransform {
 
         array.forEach(item => {
             this._filterString(item, by, filteredArray) ||
-                this._filterObject(item, by, filteredArray) ||
+                this._filterObject(item, by, item, filteredArray) ||
                     this._filterFunction(item, by, filteredArray)
         })
 
