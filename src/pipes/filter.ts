@@ -18,28 +18,32 @@ export class FilterPipe implements PipeTransform {
         return false
     }
 
-    private _filterObject(value, filter, objectRef, arrayRef: Array<Object>) {
-         if (typeof value == "object" && typeof filter === "object") {
+    private _filterObject(object, filter, objectRef, arrayRef: Array<Object>) {
+         if (typeof object == "object" && typeof filter === "object") {
             let check = true
             for(let property in filter) {
                 if(!check)
                     break;
 
                 let filterValue = filter[property]
-                let checkedValue = value[property]
+                let objectValue = object[property]
 
-                if(typeof filterValue === "string" && typeof checkedValue === "string") {
-                    check = this.stringFullCompare(checkedValue, filterValue)
-                } else if(filterValue instanceof Array && typeof checkedValue === "string") {
+                if (typeof objectValue === "undefined" && typeof filterValue === "string" && filterValue.length > 0 ) {
+                    check = false;
+                } else if (objectValue instanceof Array && typeof filterValue === "string") {
+                    check = this.stringFullCompare(objectValue.join(), filterValue)
+                } else if (typeof filterValue === "string" && typeof objectValue === "string") {
+                    check = this.stringFullCompare(objectValue, filterValue)
+                } else if(filterValue instanceof Array && typeof objectValue === "string") {
                     for(let i = 0; i < filterValue.length; i++) {
-                        check = this.stringFullCompare(checkedValue, filterValue[i])
+                        check = this.stringFullCompare(objectValue, filterValue[i])
                         if(check) break;
                     }
                 } else if(filterValue instanceof Function) {
-                    check = filterValue(checkedValue)
+                    check = filterValue(objectValue)
                 } else if (filterValue instanceof Object) {
-                    return this._filterObject(checkedValue, filterValue, objectRef, arrayRef);
-                } 
+                    return this._filterObject(objectValue, filterValue, objectRef, arrayRef);
+                }
             }
             if(check){
                 arrayRef.push(objectRef)

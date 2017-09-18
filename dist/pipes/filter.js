@@ -15,29 +15,35 @@ var FilterPipe = (function () {
         }
         return false;
     };
-    FilterPipe.prototype._filterObject = function (value, filter, objectRef, arrayRef) {
-        if (typeof value == "object" && typeof filter === "object") {
+    FilterPipe.prototype._filterObject = function (object, filter, objectRef, arrayRef) {
+        if (typeof object == "object" && typeof filter === "object") {
             var check = true;
             for (var property in filter) {
                 if (!check)
                     break;
                 var filterValue = filter[property];
-                var checkedValue = value[property];
-                if (typeof filterValue === "string" && typeof checkedValue === "string") {
-                    check = this.stringFullCompare(checkedValue, filterValue);
+                var objectValue = object[property];
+                if (typeof objectValue === "undefined" && typeof filterValue === "string" && filterValue.length > 0) {
+                    check = false;
                 }
-                else if (filterValue instanceof Array && typeof checkedValue === "string") {
+                else if (objectValue instanceof Array && typeof filterValue === "string") {
+                    check = this.stringFullCompare(objectValue.join(), filterValue);
+                }
+                else if (typeof filterValue === "string" && typeof objectValue === "string") {
+                    check = this.stringFullCompare(objectValue, filterValue);
+                }
+                else if (filterValue instanceof Array && typeof objectValue === "string") {
                     for (var i = 0; i < filterValue.length; i++) {
-                        check = this.stringFullCompare(checkedValue, filterValue[i]);
+                        check = this.stringFullCompare(objectValue, filterValue[i]);
                         if (check)
                             break;
                     }
                 }
                 else if (filterValue instanceof Function) {
-                    check = filterValue(checkedValue);
+                    check = filterValue(objectValue);
                 }
                 else if (filterValue instanceof Object) {
-                    return this._filterObject(checkedValue, filterValue, objectRef, arrayRef);
+                    return this._filterObject(objectValue, filterValue, objectRef, arrayRef);
                 }
             }
             if (check) {
