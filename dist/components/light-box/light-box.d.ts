@@ -12,4 +12,5 @@ export declare class LightBox {
     overlay: ElementRef;
     private timer;
     onClick(event: MouseEvent): void;
+    private close();
 }

@@ -40,9 +40,12 @@ var LightBox = (function () {
     });
     LightBox.prototype.onClick = function (event) {
         if (this.overlay.nativeElement.contains(event.target)) {
-            this.show = false;
-            this.onClose.emit();
+            this.close();
         }
+    };
+    LightBox.prototype.close = function () {
+        this.show = false;
+        this.onClose.emit();
     };
     return LightBox;
 }());
@@ -50,7 +53,7 @@ export { LightBox };
 LightBox.decorators = [
     { type: Component, args: [{
                 selector: 'light-box',
-                template: "\n        <section *ngIf=\"_show\" #section>\n            <div overlay #overlay></div>\n            <div content>\n                <ng-content></ng-content>\n            </div>\n        </section>\n    ",
+                template: "\n        <section *ngIf=\"_show\" #section>\n            <div overlay #overlay></div>\n            <div content>\n                <i class=\"close\" (click)=\"close()\"></i>\n                <ng-content></ng-content>\n            </div>\n        </section>\n    ",
                 styles: ["\n        section {\n            position: fixed;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            height: 100%;\n            width: 100%;\n            z-index: 100;\n            top: 0;\n            left: 0;\n            opacity: 0;\n            transition: opacity 0.35s;\n        }\n        section[hidden] {\n            display: none !important;\n        }\n        :host.shown > section {\n            opacity: 1;\n        }\n        div[overlay] {\n            position: absolute;\n            top: 0;\n            left: 0;\n            opacity: 0.7;\n            width: 100%;\n            height: 100%;\n            background-color: black;\n        }\n        div[content] {\n            flex: 0 0 auto;\n            min-width: 25%;\n            max-width: 75%;\n            max-height: 75%;\n            overflow: scroll;\n            background-color: white;\n            z-index: 2;\n        }\n    "],
                 host: {
                     '(click)': 'onClick($event)'

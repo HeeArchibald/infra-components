@@ -8,6 +8,7 @@ import { Component, ViewChild, ElementRef,
         <section *ngIf="_show" #section>
             <div overlay #overlay></div>
             <div content>
+                <i (click)="close()"></i>
                 <ng-content></ng-content>
             </div>
         </section>
@@ -107,9 +108,12 @@ export class LightBox {
 
     onClick(event: MouseEvent) {
         if (this.overlay.nativeElement.contains(event.target)) {
-            this.show = false
-            this.onClose.emit()
+            this.close()
         }
     }
 
+    private close() {
+        this.show = false
+        this.onClose.emit()
+    }
 }
